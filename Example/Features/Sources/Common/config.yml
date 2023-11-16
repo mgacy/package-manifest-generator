@@ -1,0 +1,6 @@
+dependencies:
+  targets:
+    - Core
+  products:
+  - name: Files
+    package: Files
