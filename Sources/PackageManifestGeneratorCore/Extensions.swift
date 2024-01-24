@@ -21,7 +21,7 @@ extension Folder {
     ///   - transform: The transformation to apply to the subfolder and file contents if they exist.
     /// - Returns: The results of applying the given transformation to the subfolders and contents of
     /// files with the given name in those subfolders.
-    func readFilesInSubfolders<C>(
+    func processFilesInSubfolders<C>(
         named fileName: String,
         transform: (Folder, Data?) throws -> C?
     ) throws -> [C]? {
