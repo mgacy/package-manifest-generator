@@ -16,7 +16,7 @@ public protocol CodableDefaultSource {
 
     /// The default value when encoding or decoding instances of a data type that do not provide
     /// one.
-    static var defaultValue: Value { get }
+    static var `default`: Value { get }
 }
 
 // MARK: - Extensions
@@ -42,7 +42,7 @@ public extension KeyedEncodingContainer {
     ///   - value: The value to encode.
     ///   - key: The key to associate the value with.
     mutating func encode<T>(_ value: CodableDefault<T>, forKey key: Key) throws {
-        guard value.wrappedValue != T.defaultValue else { return }
+        guard value.wrappedValue != T.default else { return }
         try encode(value.wrappedValue, forKey: key)
     }
 }
@@ -51,22 +51,27 @@ public extension KeyedEncodingContainer {
 
 /// A source of `true` values as default for Boolean members.
 public enum True: CodableDefaultSource {
-    public static var defaultValue: Bool { true }
+    public static var `default`: Bool { true }
 }
 
 /// A source of `false` values as defalt for Boolean members.
 public enum False: CodableDefaultSource {
-    public static var defaultValue: Bool { false }
+    public static var `default`: Bool { false }
 }
 
 /// A source of empty values as default for range-replaceable collections.
 public enum Empty<T>: CodableDefaultSource where T: Codable & Equatable & RangeReplaceableCollection {
-    public static var defaultValue: T { T() }
+    public static var `default`: T { T() }
 }
 
 /// A source of empty values as default for dictionary members.
 public enum EmptyDictionary<K, V>: CodableDefaultSource where K: Codable & Hashable, V: Codable & Equatable {
-    public static var defaultValue: [K: V] { Dictionary() }
+    public static var `default`: [K: V] { Dictionary() }
+}
+
+/// A source of empty values for string members.
+public enum EmptyString: CodableDefaultSource {
+    public static var `default`: String { "" }
 }
 
 // MARK: - Property Wrapper
@@ -91,7 +96,7 @@ public struct CodableDefault<Source: CodableDefaultSource>: Codable {
     /// Creates a member using the source's ``CodableDefaultSource.defaultValue`` as the default
     /// if none is provided when encoding or decoding instances of a data type.
     public init() {
-        wrappedValue = Source.defaultValue
+        wrappedValue = Source.default
     }
 
     /// Creates a member using the given value as a default when encoding or decoding instances of
