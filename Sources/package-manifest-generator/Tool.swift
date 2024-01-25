@@ -11,6 +11,6 @@ import PackageManifestGeneratorCore
 @main
 struct Tool: AsyncParsableCommand {
     mutating func run() async throws {
-        try await PackageManifestGenerator.run()
+        try await PackageManifestGenerator.run(packagePath: "")
     }
 }
