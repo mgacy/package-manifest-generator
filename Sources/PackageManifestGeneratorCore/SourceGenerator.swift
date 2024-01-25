@@ -19,11 +19,11 @@ struct SourceGenerator {
         self.indentationStyle = indentationStyle
     }
 
-    /// Returns the product and target declarations for the given target configurations.
+    /// Returns the product and target declarations for the given targets.
     ///
-    /// - Parameter configurations: The target configurations.
+    /// - Parameter configurations: The targets.
     /// - Returns: The generated product and target declarations.
-    func callAsFunction(_ configurations: [Target]) -> String {
+    func callAsFunction(_ targets: [Target]) -> String {
         ""
     }
 }
