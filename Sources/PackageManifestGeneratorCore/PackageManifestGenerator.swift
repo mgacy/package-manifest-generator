@@ -22,8 +22,6 @@ public struct PackageManifestGenerator {
         let (prefix, suffix) = try ManifestHandler.components(of: packageManifest.readAsString())
 
         let decoder = YAMLDecoder()
-        let generator = SourceGenerator(indentationStyle: config.indentationStyle)
-
         var targets: [Target] = []
 
         // Sources
@@ -54,7 +52,7 @@ public struct PackageManifestGenerator {
         }
 
         // Update manifest
-        let generated = generator(targets)
+        let generated = SourceGenerator(indentationStyle: config.indentationStyle)(targets)
         let updatedManifest = ManifestHandler.assemble(
             prefix: prefix,
             generated: generated,
