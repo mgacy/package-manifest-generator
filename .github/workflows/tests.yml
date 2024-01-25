@@ -13,6 +13,6 @@ on:
       - ready_for_review
 
 jobs:
-  unit_tests:
+  test:
     if: github.event.pull_request.draft == false
-    uses: Mobelux/swift-package-workflows@main
+    uses: Mobelux/swift-package-workflows/.github/workflows/test.yml@main
