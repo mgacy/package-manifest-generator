@@ -9,4 +9,5 @@ import Foundation
 
 /// The configuration for a test target.
 public struct TestConfiguration: Codable, Equatable {
+    public let target: TargetConfiguration?
 }
