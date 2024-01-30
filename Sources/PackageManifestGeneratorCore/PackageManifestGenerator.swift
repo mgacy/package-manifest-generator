@@ -16,7 +16,7 @@ public struct PackageManifestGenerator {
     /// - Parameters:
     ///   - packagePath: The path to the package root.
     ///   - configuration: The generator configuration.
-    public static func run(packagePath: String, configuration config: Configuration) async throws {
+    public static func run(packagePath: String, configuration config: GeneratorConfiguration) async throws {
         let packageRoot = try Folder(path: packagePath)
         let packageManifest = try packageRoot.file(named: "Package.swift")
         let (prefix, suffix) = try ManifestHandler.components(of: packageManifest.readAsString())
@@ -69,8 +69,8 @@ public extension PackageManifestGenerator {
     ///   - configurationPath: The path to the generator configuration file.
     static func run(packagePath: String, configurationPath: String? = nil) async throws {
         let configuration = try configurationPath.flatMap { path in
-            try YAMLDecoder().decode(Configuration.self, from: try File(path: path).read())
-        } ?? Configuration()
+            try YAMLDecoder().decode(GeneratorConfiguration.self, from: try File(path: path).read())
+        } ?? GeneratorConfiguration()
 
         try await run(packagePath: packagePath, configuration: configuration)
     }

@@ -1,5 +1,5 @@
 //
-//  Configuration.swift
+//  GeneratorConfiguration.swift
 //  PackageManifestGenerator
 //
 //  Created by Mathew Gacy on 11/16/23.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// The configuration for ``PackageManifestGenerator``.
-public struct Configuration: Codable, Equatable {
+public struct GeneratorConfiguration: Codable, Equatable {
     public enum DefaultTargetConfigurationName: CodableDefaultSource {
         public static var `default` = "_config.yml"
     }
