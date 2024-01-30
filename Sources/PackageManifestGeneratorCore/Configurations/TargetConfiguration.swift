@@ -8,6 +8,6 @@
 import Foundation
 
 /// The configuration for a package target.
-struct TargetConfiguration: Codable, Equatable {
-   // ...
+public struct TargetConfiguration: Codable, Equatable {
+    // ...
 }

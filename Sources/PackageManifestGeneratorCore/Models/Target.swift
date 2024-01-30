@@ -7,10 +7,9 @@
 
 import Foundation
 
-struct Target: Codable, Equatable {
-    /// The target name.
+/// A Swift package target.
+struct Target: Equatable {
+    /// The name of the target.
     let name: String
 
-    /// The target configuration.
-    let configuration: TargetConfiguration
 }
