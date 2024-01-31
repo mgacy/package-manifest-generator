@@ -16,6 +16,14 @@ public enum IndentationStyle: String, Codable, CodableDefaultSource, Equatable {
     /// A style of indentation using tabs.
     case tabs
 
+    var source: String {
+        switch self {
+        case .twoSpaces: "  "
+        case .fourSpaces: "    "
+        case .tabs: "\t"
+        }
+    }
+
     public static var `default`: Self {
         .fourSpaces
     }
