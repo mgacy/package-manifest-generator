@@ -51,6 +51,6 @@ public struct TargetConfiguration: Codable, Equatable {
     public let exclude: [String]?
     public let sources: [String]?
     public let resources: [Resource]?
-    public let packageAccess: Bool
+    public let packageAccess: Bool?
     public let plugins: [Plugin]?
 }
