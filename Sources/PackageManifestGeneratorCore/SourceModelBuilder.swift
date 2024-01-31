@@ -52,18 +52,18 @@ struct SourceModelBuilder {
 }
 
 extension SourceModelBuilder {
-    func makeDependencies(_ configuration: TargetConfiguration.Dependencies) throws -> [Target.Dependency] {
-        let targetDependencies = configuration.targets?.map {
-            Target.Dependency.byNameItem(name: $0)
-        } ?? []
-        let productDependencies = configuration.products?.map {
-            Target.Dependency.productItem(name: $0.name, package: $0.package)
-        } ?? []
-
-        return targetDependencies + productDependencies
+    func makeDependency(_ configuration: DependencyConfiguration) throws -> Target.Dependency {
+        switch configuration.type {
+        case .target:
+                .targetItem(name: configuration.name)
+        case .product:
+            .productItem(name: configuration.name, package: configuration.package)
+        case .byName:
+            .byNameItem(name: configuration.name)
+        }
     }
 
-    func makeResource(_ resource: TargetConfiguration.Resource) throws -> Target.Resource {
+    func makeResource(_ resource: ResourceConfiguration) throws -> Target.Resource {
         if !resource.isProcess && resource.localization != nil {
             throw "Invalid Configuration"
         }
@@ -82,7 +82,7 @@ extension SourceModelBuilder {
         targetType: Target.TargetType = .regular,
         configuration: TargetConfiguration? = nil
     ) throws -> Target {
-        let dependencies = try configuration?.dependencies.flatMap(makeDependencies(_:))
+        let dependencies = try configuration?.dependencies?.map(makeDependency(_:))
         let resources = try configuration?.resources?.map(makeResource(_:))
         let plugins = configuration?.plugins?.map { Target.PluginUsage(name: $0.name, package: $0.package) }
 
