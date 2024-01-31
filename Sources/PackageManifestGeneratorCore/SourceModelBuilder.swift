@@ -9,8 +9,8 @@ import Foundation
 
 struct SourceModelBuilder {
     func callAsFunction(
-        sources: [Directory<SourceConfiguration>]?,
-        tests: [Directory<TestConfiguration>]?
+        sources: [Configuration<SourceConfiguration>]?,
+        tests: [Configuration<TestConfiguration>]?
     ) throws -> ([Target], [Product]?)? {
         var products: [Product] = []
         var targets: [Target] = []

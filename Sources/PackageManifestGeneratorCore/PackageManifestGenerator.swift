@@ -27,7 +27,7 @@ public struct PackageManifestGenerator {
         let sourceConfigs = try packageRoot.subfolder(named: "Sources")
             .processFilesInSubfolders(named: config.targetConfigurationName) { folder, data in
                 try data.flatMap {
-                    Directory(
+                    Configuration(
                         name: folder.name,
                         configuration: try decoder.decode(SourceConfiguration.self, from: $0))
                 }
@@ -37,7 +37,7 @@ public struct PackageManifestGenerator {
         let tests = try? packageRoot.subfolder(named: "Tests")
         let testConfigs = try tests?.processFilesInSubfolders(named: config.targetConfigurationName) { folder, data in
             try data.flatMap {
-                Directory(
+                Configuration(
                     name: folder.name,
                     configuration: try decoder.decode(TestConfiguration.self, from: $0))
             }
