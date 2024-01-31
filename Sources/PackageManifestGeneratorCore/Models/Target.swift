@@ -84,13 +84,3 @@ struct Target: Equatable {
     /// The plug-ins used by by the target.
     let plugins: [PluginUsage]?
 }
-
-extension Target.TargetType {
-    var sortOrder: Int {
-        switch self {
-        case .regular: 1
-        case .executable: 0
-        case .test: 2
-        }
-    }
-}
