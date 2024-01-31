@@ -21,9 +21,11 @@ struct SourceGenerator {
 
     /// Returns the product and target declarations for the given targets.
     ///
-    /// - Parameter configurations: The targets.
+    /// - Parameters:
+    ///   - targets: The targets.
+    ///   - products: The products
     /// - Returns: The generated product and target declarations.
-    func callAsFunction(_ targets: [Target]) -> String {
+    func callAsFunction(targets: [Target], products: [Product]?) -> String {
         ""
     }
 }

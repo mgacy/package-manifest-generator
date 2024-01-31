@@ -22,37 +22,35 @@ public struct PackageManifestGenerator {
         let (prefix, suffix) = try ManifestHandler.components(of: packageManifest.readAsString())
 
         let decoder = YAMLDecoder()
-        var targets: [Target] = []
 
         // Sources
-        let sourceConfigs = try packageRoot
-            .subfolder(named: "Sources")
+        let sourceConfigs = try packageRoot.subfolder(named: "Sources")
             .processFilesInSubfolders(named: config.targetConfigurationName) { folder, data in
                 try data.flatMap {
-                    Target(
+                    Directory(
                         name: folder.name,
-                        configuration: try decoder.decode(TargetConfiguration.self, from: $0))
+                        configuration: try decoder.decode(SourceConfiguration.self, from: $0))
                 }
             }
-        if let sourceConfigs {
-            targets.append(contentsOf: sourceConfigs)
-        }
 
         // Tests
         let tests = try? packageRoot.subfolder(named: "Tests")
         let testConfigs = try tests?.processFilesInSubfolders(named: config.targetConfigurationName) { folder, data in
             try data.flatMap {
-                Target(
+                Directory(
                     name: folder.name,
-                    configuration: try decoder.decode(TargetConfiguration.self, from: $0))
+                    configuration: try decoder.decode(TestConfiguration.self, from: $0))
             }
         }
-        if let testConfigs {
-            targets.append(contentsOf: testConfigs)
+
+        guard let (targets, products) = try SourceModelBuilder()(sources: sourceConfigs, tests: testConfigs) else {
+            return
         }
 
         // Update manifest
-        let generated = SourceGenerator(indentationStyle: config.indentationStyle)(targets)
+        let generated = SourceGenerator(indentationStyle: config.indentationStyle)(
+            targets: targets,
+            products: products)
         let updatedManifest = ManifestHandler.assemble(
             prefix: prefix,
             generated: generated,
