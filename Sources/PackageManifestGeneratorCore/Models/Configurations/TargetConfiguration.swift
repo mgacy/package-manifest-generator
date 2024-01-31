@@ -124,7 +124,7 @@ public struct ResourceConfiguration: Codable, Equatable {
 
     /// The localization for the resource.
     ///
-    /// - Warning: this is only valid for resources with a type of ``Rule-swift.enum.process``; an
+    /// - Warning: this is only valid for resources with a type of ``ResourceConfiguration/Rule-swift.enum/process``; an
     /// error will be thrown if a value is provided for a resource with a different rule.
     public let localization: Localization?
 

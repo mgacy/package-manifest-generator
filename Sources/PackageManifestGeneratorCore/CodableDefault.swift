@@ -93,8 +93,8 @@ public struct CodableDefault<Source: CodableDefaultSource>: Codable {
     /// The underlying value referenced by the wrapper.
     public var wrappedValue: Source.Value
 
-    /// Creates a member using the source's ``CodableDefaultSource.defaultValue`` as the default
-    /// if none is provided when encoding or decoding instances of a data type.
+    /// Creates a member using the source's ``CodableDefaultSource/default`` as the default if
+    /// none is provided when encoding or decoding instances of a data type.
     public init() {
         wrappedValue = Source.default
     }
