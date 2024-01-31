@@ -37,7 +37,7 @@ struct Target: Equatable {
     }
 
     /// The different types of a target's dependency on another entity.
-    public enum Dependency: Equatable {
+    enum Dependency: Equatable {
         case targetItem(name: String)
         case productItem(name: String, package: String?)
         case byNameItem(name: String)
