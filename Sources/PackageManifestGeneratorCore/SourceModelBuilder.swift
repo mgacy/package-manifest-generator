@@ -7,7 +7,14 @@
 
 import Foundation
 
+/// A builder to validate configuration files and generate the source models they represent.
 struct SourceModelBuilder {
+    /// Returns products and targets specified by the given configurations.
+    ///
+    /// - Parameters:
+    ///   - sources: The source target configurations.
+    ///   - tests: The test target configurations.
+    /// - Returns: The products and targets specified by the given configurations.
     func callAsFunction(
         sources: [Configuration<SourceConfiguration>]?,
         tests: [Configuration<TestConfiguration>]?
