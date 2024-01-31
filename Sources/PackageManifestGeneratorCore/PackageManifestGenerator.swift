@@ -24,21 +24,25 @@ public struct PackageManifestGenerator {
         let decoder = YAMLDecoder()
 
         // Sources
-        let sourceConfigs = try packageRoot.subfolder(named: "Sources")
+        let sourceConfigs = try packageRoot.targetFolder(.sources)
             .processFilesInSubfolders(named: config.targetConfigurationName) { folder, data in
                 try data.flatMap {
                     Configuration(
-                        name: folder.name,
+                        targetDirectory: .sources,
+                        directoryName: folder.name,
+                        configurationName: config.targetConfigurationName,
                         configuration: try decoder.decode(SourceConfiguration.self, from: $0))
                 }
             }
 
         // Tests
-        let tests = try? packageRoot.subfolder(named: "Tests")
+        let tests = try? packageRoot.targetFolder(.tests)
         let testConfigs = try tests?.processFilesInSubfolders(named: config.targetConfigurationName) { folder, data in
             try data.flatMap {
                 Configuration(
-                    name: folder.name,
+                    targetDirectory: .tests,
+                    directoryName: folder.name,
+                    configurationName: config.targetConfigurationName,
                     configuration: try decoder.decode(TestConfiguration.self, from: $0))
             }
         }

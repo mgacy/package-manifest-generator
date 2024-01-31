@@ -18,21 +18,25 @@ struct SourceModelBuilder {
         // Sources
         if let sources {
             for source in sources {
-                let targetType: Target.TargetType = switch source.configuration.type {
-                case .executable: .executable
-                case .regular: .regular
-                }
-
-                let target = try makeTarget(
-                    directoryName: source.name,
-                    targetType: targetType,
-                    configuration: source.configuration.target)
-                targets.append(target)
-
-                if let productConfigs = source.configuration.products {
-                    for productConfig in productConfigs {
-                        products.append(makeProduct(productConfig, targetName: target.name))
+                do {
+                    let targetType: Target.TargetType = switch source.configuration.type {
+                    case .executable: .executable
+                    case .regular: .regular
                     }
+
+                    let target = try makeTarget(
+                        directoryName: source.directoryName,
+                        targetType: targetType,
+                        configuration: source.configuration.target)
+                    targets.append(target)
+
+                    if let productConfigs = source.configuration.products {
+                        for productConfig in productConfigs {
+                            products.append(makeProduct(productConfig, targetName: target.name))
+                        }
+                    }
+                } catch {
+                    throw "Invalid configuration at `\(source.path)"
                 }
             }
         }
@@ -40,10 +44,14 @@ struct SourceModelBuilder {
         // Tests
         if let tests {
             for test in tests {
-                targets.append(try makeTarget(
-                    directoryName: test.name,
-                    targetType: .test,
-                    configuration: test.configuration.target))
+                do {
+                    targets.append(try makeTarget(
+                        directoryName: test.directoryName,
+                        targetType: .test,
+                        configuration: test.configuration.target))
+                } catch {
+                    throw "Invalid configuration at `\(test.path)"
+                }
             }
         }
 
