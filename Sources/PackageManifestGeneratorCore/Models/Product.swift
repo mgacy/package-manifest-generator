@@ -9,12 +9,14 @@ import Foundation
 
 /// A Swift package product.
 struct Product: Equatable {
-    
-    enum ProductType: Codable, Equatable {
+    enum LibraryType: String, Equatable {
+        case dynamic
+        case `static`
+    }
+
+    enum ProductType: Equatable {
         case executable
-        case library
-        case dynamicLibrary
-        case staticLibrary
+        case library(_ type: LibraryType?)
         case plugin
     }
 
