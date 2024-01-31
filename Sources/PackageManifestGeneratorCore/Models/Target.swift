@@ -81,7 +81,7 @@ struct Target: Equatable {
     /// The target's dependencies on other entities inside or outside the package.
     var dependencies: [Dependency]?
 
-    /// Plug-ins used by by the target.
+    /// The plug-ins used by by the target.
     let plugins: [PluginUsage]?
 }
 
