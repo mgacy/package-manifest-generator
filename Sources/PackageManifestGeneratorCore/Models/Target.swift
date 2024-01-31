@@ -10,10 +10,13 @@ import Foundation
 /// A Swift package target.
 struct Target: Equatable {
 
+    /// A plug-in used in a target.
     struct PluginUsage: Equatable {
         let name: String
         let package: String?
     }
+
+    /// A resource to bundle with the Swift package.
     struct Resource: Equatable {
 
         enum Rule: Equatable {
@@ -26,19 +29,20 @@ struct Target: Equatable {
         let path: String
     }
 
+    /// The different types of a target.
     enum TargetType: String {
         case regular = "target"
         case executable = "executableTarget"
         case test = "testTarget"
     }
 
+    /// The different types of a target's dependency on another entity.
     public enum Dependency: Equatable {
         case targetItem(name: String)
         case productItem(name: String, package: String?)
         case byNameItem(name: String)
     }
 
-    /// The name of the target.
     let name: String
     let type: TargetType
     let packageAccess: Bool

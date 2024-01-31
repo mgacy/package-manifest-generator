@@ -10,7 +10,7 @@ import Foundation
 /// The configuration for a regular or executable target and associated products.
 public struct SourceConfiguration: Codable, Equatable {
 
-    /// The different types of a target.
+    /// The different types of products.
     public enum ProductType: String, Codable, CodableDefaultSource, Equatable {
         /// An executable product.
         case executable
@@ -26,15 +26,23 @@ public struct SourceConfiguration: Codable, Equatable {
         }
     }
 
+    /// The configuration for a product.
     public struct Product: Codable, Equatable {
-        // TODO: how does having a default work with name, target being optional?
+        /// The type of product.
         @CodableDefault<ProductType> public var type: ProductType
+
+        /// The name of the product.
         public let name: String?
+
+        /// The names of targets in this product.
         public let targets: [String]?
     }
 
+    /// The different types of targets.
     public enum TargetType: String, Codable, CodableDefaultSource, Equatable {
+        /// A regular target.
         case regular
+        /// An executable target.
         case executable
 
         public static var `default`: TargetType {

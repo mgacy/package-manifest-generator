@@ -11,5 +11,3 @@ import Foundation
 public struct TestConfiguration: Codable, Equatable {
     public let target: TargetConfiguration?
 }
-
-
