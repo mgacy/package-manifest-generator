@@ -38,7 +38,18 @@ var generatedTargets: [Target] = [
         ]
     ),
     .target(
-        name: "Foo"
+        name: "Foo",
+        dependencies: [
+            "Common"
+        ]
+    ),
+    .testTarget(
+        name: "FeaturesTests",
+        dependencies: [
+            "Bar",
+            "Common",
+            "Foo"
+        ]
     )
 ]
 
