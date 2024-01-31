@@ -14,6 +14,101 @@ struct SourceModelBuilder {
     ) throws -> ([Target], [Product]?)? {
         var products: [Product] = []
         var targets: [Target] = []
+
+        // Sources
+        if let sources {
+            for source in sources {
+                let targetType: Target.TargetType = switch source.configuration.type {
+                case .executable: .executable
+                case .regular: .regular
+                }
+
+                let target = try makeTarget(
+                    directoryName: source.name,
+                    targetType: targetType,
+                    configuration: source.configuration.target)
+                targets.append(target)
+
+                if let productConfigs = source.configuration.products {
+                    for productConfig in productConfigs {
+                        products.append(makeProduct(productConfig, targetName: target.name))
+                    }
+                }
+            }
+        }
+
+        // Tests
+        if let tests {
+            for test in tests {
+                targets.append(try makeTarget(
+                    directoryName: test.name,
+                    targetType: .test,
+                    configuration: test.configuration.target))
+            }
+        }
+
         return (targets, products.isEmpty ? nil : products)
+    }
+}
+
+extension SourceModelBuilder {
+    func makeDependencies(_ configuration: TargetConfiguration.Dependencies) throws -> [Target.Dependency] {
+        let targetDependencies = configuration.targets?.map {
+            Target.Dependency.byNameItem(name: $0)
+        } ?? []
+        let productDependencies = configuration.products?.map {
+            Target.Dependency.productItem(name: $0.name, package: $0.package)
+        } ?? []
+
+        return targetDependencies + productDependencies
+    }
+
+    func makeResource(_ resource: TargetConfiguration.Resource) throws -> Target.Resource {
+        if !resource.isProcess && resource.localization != nil {
+            throw "Invalid Configuration"
+        }
+
+        let rule: Target.Resource.Rule = switch resource.rule {
+        case .copy: .copy
+        case .embed: .embedInCode
+        case .process: .process(resource.localization?.rawValue)
+        }
+
+        return Target.Resource(rule: rule, path: resource.path)
+    }
+
+    func makeTarget(
+        directoryName: String,
+        targetType: Target.TargetType = .regular,
+        configuration: TargetConfiguration? = nil
+    ) throws -> Target {
+        let dependencies = try configuration?.dependencies.flatMap(makeDependencies(_:))
+        let resources = try configuration?.resources?.map(makeResource(_:))
+        let plugins = configuration?.plugins?.map { Target.PluginUsage(name: $0.name, package: $0.package) }
+
+        return Target(
+            name: configuration?.name ?? directoryName,
+            type: targetType,
+            packageAccess: configuration?.packageAccess ?? true,
+            path: configuration?.path,
+            sources: configuration?.sources,
+            resources: resources,
+            exclude: configuration?.exclude,
+            dependencies: dependencies,
+            plugins: plugins)
+    }
+
+    func makeProduct(_ product: SourceConfiguration.Product, targetName: String) -> Product {
+        let productType: Product.ProductType = switch product.type {
+        case .executable: .executable
+        case .library: .library(nil)
+        case .dynamicLibrary: .library(.dynamic)
+        case .staticLibrary: .library(.static)
+        }
+
+        return Product(
+            name: product.name ?? targetName,
+            type: productType,
+            targets: product.targets ?? [targetName])
     }
 }
