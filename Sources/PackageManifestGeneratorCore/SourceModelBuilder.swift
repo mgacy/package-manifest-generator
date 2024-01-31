@@ -12,6 +12,10 @@ struct SourceModelBuilder {
         sources: [Configuration<SourceConfiguration>]?,
         tests: [Configuration<TestConfiguration>]?
     ) throws -> ([Target], [Product]?)? {
+        guard sources != nil || tests != nil else {
+            return nil
+        }
+
         var products: [Product] = []
         var targets: [Target] = []
 
