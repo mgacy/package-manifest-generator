@@ -10,7 +10,9 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../Core"),
-        .package(url: "https://github.com/johnsundell/files.git", from: "4.0.0")
+        .package(url: "https://github.com/johnsundell/files.git", from: "4.0.0"),
+        // Make command plug-in available
+        .package(path: "../../")
     ]
 )
 
