@@ -16,7 +16,19 @@ struct ManifestGeneratorPlugin: CommandPlugin {
     ///   - context: The plug-in context.
     ///   - arguments: The command arguments.
     func performCommand(context: PluginContext, arguments: [String]) async throws {
-        // ...
+        let generator = try context.tool(named: "package-manifest-generator").path
+
+        let packagePath = context.package.directory
+        var generatorArgs = [
+            "--package-path", packagePath.string
+        ]
+
+        var argExtractor = ArgumentExtractor(arguments)
+        if let configFile = argExtractor.extractOption(named: "config").first {
+            generatorArgs.append(contentsOf: ["--config", configFile])
+        }
+
+        try generator.exec(arguments: generatorArgs)
     }
 }
 
