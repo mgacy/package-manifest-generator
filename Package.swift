@@ -10,7 +10,8 @@ let package = Package(
     ],
     products: [
         .executable(name: "package-manifest-generator", targets: ["package-manifest-generator"]),
-        .library(name: "PackageManifestGeneratorCore", targets: ["PackageManifestGeneratorCore"])
+        .library(name: "PackageManifestGeneratorCore", targets: ["PackageManifestGeneratorCore"]),
+        .plugin(name: "ManifestGeneratorPlugin", targets: ["ManifestGeneratorPlugin"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.3.0"),
@@ -30,10 +31,28 @@ let package = Package(
             dependencies: [
                 .product(name: "Files", package: "Files"),
                 .product(name: "Yams", package: "Yams")
-            ]),
+            ]
+        ),
         .testTarget(
             name: "PackageManifestGeneratorCoreTests",
-            dependencies: ["PackageManifestGeneratorCore"]
+            dependencies: [
+                "PackageManifestGeneratorCore"
+            ]
+        ),
+        .plugin(
+            name: "ManifestGeneratorPlugin",
+            capability: .command(
+                intent: .custom(
+                    verb: "generate-manifest",
+                    description: "Updates package manifest."
+                ),
+                permissions: [
+                    .writeToPackageDirectory(reason: "Update package manifest.")
+                ]
+            ),
+            dependencies: [
+                "package-manifest-generator"
+            ]
         )
     ]
 )
