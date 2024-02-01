@@ -31,18 +31,3 @@ struct ManifestGeneratorPlugin: CommandPlugin {
         try generator.exec(arguments: generatorArgs)
     }
 }
-
-#if canImport(XcodeProjectPlugin)
-import XcodeProjectPlugin
-
-extension ManifestGeneratorPlugin: XcodeCommandPlugin {
-    /// Invoked by Xcode to perform the custom actions of the command.
-    ///
-    /// - Parameters:
-    ///   - context: The Xcode plug-in context.
-    ///   - arguments: The command arguments.
-    func performCommand(context: XcodePluginContext, arguments: [String]) throws {
-        /// ...
-    }
-}
-#endif
