@@ -40,3 +40,16 @@ Invoke the command plugin with:
 ```sh
 $ swift package generate-manifest --allow-writing-to-package-directory
 ```
+
+## ⚙ Usage
+
+### Tool Configuration
+
+Configure Package Manifest Generator by adding a `.packagemanifestgenerator.yml` file to the package root:
+
+```yaml
+# Control the indentation style of the generate code. Valid options are `twoSpaces`, `fourSpaces` (default), and `tabs`.
+indentationStyle: fourSpaces
+# Name of the configuration file at the root of target directories.
+targetConfigurationName: '_config.yml'
+```
