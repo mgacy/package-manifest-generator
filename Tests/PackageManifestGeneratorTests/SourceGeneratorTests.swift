@@ -49,7 +49,7 @@ extension SourceGeneratorTests {
 
     func testStaticLibraryProduct() {
         let expected = """
-            .library(name: "Target", type: .static, targets: ["Target])
+            .library(name: "Target", type: .static, targets: ["Target"])
             """
 
         let targetName = "Target"
@@ -115,7 +115,7 @@ extension SourceGeneratorTests {
 extension SourceGeneratorTests {
     func testTargetItemDependency() {
         let expected = """
-            .targetItem(name: "Target")
+            "Target"
             """
 
         let actual = sut.dependency(
@@ -127,7 +127,7 @@ extension SourceGeneratorTests {
 
     func testProductItemDependency() {
         let expected = """
-            .productItem(name: "Product", package: "Package")
+            .product(name: "Product", package: "Package")
             """
 
         let actual = sut.dependency(
@@ -139,7 +139,7 @@ extension SourceGeneratorTests {
 
     func testPackagelessProductItemDependency() {
         let expected = """
-            .productItem(name: "Product")
+            .product(name: "Product")
             """
 
         let actual = sut.dependency(
@@ -151,7 +151,7 @@ extension SourceGeneratorTests {
 
     func testByNameDependency() {
         let expected = """
-            .byNameItem(name: "Name")
+            .byName(name: "Name")
             """
 
         let actual = sut.dependency(

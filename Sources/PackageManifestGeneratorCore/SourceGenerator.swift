@@ -51,7 +51,7 @@ extension SourceGenerator {
             (type.flatMap { ", type: .\($0.rawValue)" } ?? "") +
             ", targets: \(targets))"
         case .plugin:
-            ".plugin(name:  \(name), targets: \(targets))"
+            ".plugin(name: \(name), targets: \(targets))"
         }
     }
 
@@ -74,13 +74,13 @@ extension SourceGenerator {
         case .embedInCode:
             ".embedInCode(\(path))"
         case .process(let localization):
-            ".process(\(path)" + (localization.flatMap { ", localization: \($0.rawValue)" } ?? "") + ")"
+            ".process(\(path)" + (localization.flatMap { ", localization: .\($0.rawValue)" } ?? "") + ")"
         }
     }
 
     static func plugin(_ plugin: Target.PluginUsage) -> String {
         ".plugin(name: \(plugin.name.quoted())"
-            + (plugin.package.flatMap { ", package: \($0)" } ?? "")
+            + (plugin.package.flatMap { ", package: \($0.quoted())" } ?? "")
             + ")"
     }
 
