@@ -103,12 +103,14 @@ extension SourceGenerator {
 
         // Exclude
         if let exclude = target.exclude, exclude.isNotEmpty {
-            arguments.append("exclude: \(exclude.asSourceArray(indentationStyle: indentationStyle))")
+            let quoted = exclude.map { $0.quoted() }
+            arguments.append("exclude: \(quoted.asSourceArray(indentationStyle: indentationStyle))")
         }
 
         // Sources
         if let sources = target.sources, sources.isNotEmpty {
-            arguments.append("sources: \(sources.asSourceArray(indentationStyle: indentationStyle))")
+            let quoted = sources.map { $0.quoted() }
+            arguments.append("sources: \(quoted.asSourceArray(indentationStyle: indentationStyle))")
         }
 
         // Resources

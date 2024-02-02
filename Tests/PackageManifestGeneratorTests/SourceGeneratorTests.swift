@@ -245,3 +245,84 @@ extension SourceGeneratorTests {
         XCTAssertEqual(actual, expected)
     }
 }
+
+// MARK: - Targets
+extension SourceGeneratorTests {
+    func testMinimalTarget() {
+        let expected = """
+            .target(
+                name: "Target"
+            )
+            """
+
+        let target = Target(name: "Target")
+        let sut = SourceGenerator(indentationStyle: .fourSpaces)
+        let actual = sut.target(target)
+        XCTAssertEqual(actual, expected)
+    }
+
+    func testComplexTarget() {
+        let expected = """
+            .executableTarget(
+                name: "executable-target",
+                dependencies: [
+                    "MyTarget",
+                    .product(name: "MyProduct", package: "my-product")
+                ],
+                path: "path/to/target",
+                exclude: [
+                    ".swiftlint.yml"
+                ],
+                sources: [
+                    "source/path/1",
+                    "source/path/2"
+                ],
+                resource: [
+                    .copy("Resources")
+                ],
+                plugins: [
+                    .plugin(name: "MyPlugin", package: "my-plugin")
+                ]
+            )
+            """
+
+        let target = Target(
+            name: "executable-target",
+            type: .executable,
+            packageAccess: false,
+            path: "path/to/target",
+            sources: [
+                "source/path/1",
+                "source/path/2"
+            ],
+            resources: [
+                Target.Resource(rule: .copy, path: "Resources")
+            ],
+            exclude: [
+                ".swiftlint.yml"
+            ],
+            dependencies: [
+                .targetItem(name: "MyTarget"),
+                .productItem(name: "MyProduct", package: "my-product")
+            ],
+            plugins: [
+                Target.PluginUsage(name: "MyPlugin", package: "my-plugin")
+            ])
+        let sut = SourceGenerator(indentationStyle: .fourSpaces)
+        let actual = sut.target(target)
+        XCTAssertEqual(actual, expected)
+    }
+
+    func testIndendation() {
+        let expected = """
+            .target(
+              name: "Target"
+            )
+            """
+
+        let target = Target(name: "Target")
+        let sut = SourceGenerator(indentationStyle: .twoSpaces)
+        let actual = sut.target(target)
+        XCTAssertEqual(actual, expected)
+    }
+}
