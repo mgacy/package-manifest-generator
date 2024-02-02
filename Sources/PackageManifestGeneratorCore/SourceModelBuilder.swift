@@ -71,7 +71,7 @@ struct SourceModelBuilder {
 }
 
 extension SourceModelBuilder {
-    func makeDependency(_ configuration: DependencyConfiguration) throws -> Target.Dependency {
+    func makeDependency(_ configuration: DependencyConfiguration) -> Target.Dependency {
         switch configuration.type {
         case .target:
                 .targetItem(name: configuration.name)
@@ -107,7 +107,7 @@ extension SourceModelBuilder {
         targetType: Target.TargetType = .regular,
         configuration: TargetConfiguration? = nil
     ) throws -> Target {
-        let dependencies = try configuration?.dependencies?.map(makeDependency(_:))
+        let dependencies = configuration?.dependencies?.map(makeDependency(_:))
         let resources = try configuration?.resources?.map(makeResource(_:))
         let plugins = configuration?.plugins?.map { Target.PluginUsage(name: $0.name, package: $0.package) }
 
