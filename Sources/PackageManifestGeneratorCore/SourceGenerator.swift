@@ -74,7 +74,7 @@ extension SourceGenerator {
         case .embedInCode:
             ".embedInCode(\(path))"
         case .process(let localization):
-            ".process(\(path)" + (localization.flatMap { ", localization: \($0)" } ?? "") + ")"
+            ".process(\(path)" + (localization.flatMap { ", localization: \($0.rawValue)" } ?? "") + ")"
         }
     }
 

@@ -22,11 +22,19 @@ struct Target: Equatable {
     /// A resource to bundle with the Swift package.
     struct Resource: Equatable {
 
+        /// The different types of localization for resources.
+        public enum Localization: String, Codable, Equatable {
+            /// The default localization.
+            case base
+            /// The base internationalization.
+            case `default`
+        }
+
         /// The different rules for resources.
         enum Rule: Equatable {
             case copy
             case embedInCode
-            case process(_ localization: String?)
+            case process(_ localization: Localization?)
         }
 
         /// The rule for the resource.
