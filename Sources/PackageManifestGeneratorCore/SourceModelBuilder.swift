@@ -16,8 +16,8 @@ struct SourceModelBuilder {
     ///   - tests: The test target configurations.
     /// - Returns: The products and targets specified by the given configurations.
     func callAsFunction(
-        sources: [Configuration<SourceConfiguration>]?,
-        tests: [Configuration<TestConfiguration>]?
+        sources: [Configuration<SourceConfiguration>]? = nil,
+        tests: [Configuration<TestConfiguration>]? = nil
     ) throws -> ([Target], [Product]?)? {
         guard sources != nil || tests != nil else {
             return nil
@@ -47,7 +47,7 @@ struct SourceModelBuilder {
                         }
                     }
                 } catch {
-                    throw "Invalid configuration at `\(source.path)"
+                    throw "Invalid configuration at `\(source.path)`"
                 }
             }
         }
