@@ -143,3 +143,62 @@ extension SourceModelBuilderTests {
         XCTAssertEqual(actual.name, expectedName)
     }
 }
+
+// MARK: - Products
+extension SourceModelBuilderTests {
+    func testMakeExecutableProduct() {
+        let expected = Product(
+            name: "ProductName",
+            type: .executable,
+            targets: ["Target"])
+
+        let config = SourceConfiguration.Product(
+            type: .executable,
+            name: "ProductName",
+            targets: ["Target"])
+        let actual = sut.makeProduct(config, targetName: "TargetName")
+
+        XCTAssertEqual(actual, expected)
+    }
+
+    func testMakeUnspecifiedLibraryProduct() {
+        let expected = Product(
+            name: "ProductName",
+            type: .library(nil),
+            targets: ["Target"])
+
+        let config = SourceConfiguration.Product(
+            type: .library,
+            name: "ProductName",
+            targets: ["Target"])
+        let actual = sut.makeProduct(config, targetName: "TargetName")
+
+        XCTAssertEqual(actual, expected)
+    }
+
+    func testMakeDynamicLibraryProduct() {
+        let expected = Product(
+            name: "ProductName",
+            type: .library(.dynamic),
+            targets: ["Target"])
+
+        let config = SourceConfiguration.Product(
+            type: .dynamicLibrary,
+            name: "ProductName",
+            targets: ["Target"])
+        let actual = sut.makeProduct(config, targetName: "TargetName")
+
+        XCTAssertEqual(actual, expected)
+    }
+
+    func testProductUsesTargetName() {
+        let expectedName = "Target"
+        let expectedTargets = [expectedName]
+
+        let config = SourceConfiguration.Product(type: .library)
+        let actual = sut.makeProduct(config, targetName: expectedName)
+
+        XCTAssertEqual(actual.name, expectedName)
+        XCTAssertEqual(actual.targets, expectedTargets)
+    }
+}
