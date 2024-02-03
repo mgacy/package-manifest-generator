@@ -202,3 +202,69 @@ extension SourceModelBuilderTests {
         XCTAssertEqual(actual.targets, expectedTargets)
     }
 }
+
+// MARK: - Builder
+extension SourceModelBuilderTests {
+    func testBuilder() throws {
+        let expectedRegularTarget = Target(
+            name: "TargetName",
+            type: .regular)
+        let expectedTestTarget = Target(
+            name: "TestTargetName",
+            type: .test)
+        let expectedProduct = Product(
+            name: "ProductName",
+            type: .library(nil),
+            targets: ["Target"])
+
+        let sourceConfig = Configuration(
+            targetDirectory: .sources,
+            directoryName: "SomeSourceDirectory",
+            configurationName: "config.yml",
+            configuration: SourceConfiguration(
+                type: .regular,
+                target: TargetConfiguration(
+                    name: "TargetName"
+                ),
+                products: [
+                    SourceConfiguration.Product(
+                        type: .library,
+                        name: "ProductName",
+                        targets: ["Target"])
+                ]
+            ))
+        let testConfig = Configuration(
+            targetDirectory: .tests,
+            directoryName: "SomeTestDirectory",
+            configurationName: "SomeTestConfiguration",
+            configuration: TestConfiguration(
+                target: TargetConfiguration(
+                    name: "TestTargetName"
+                )))
+        let (actualTargets, actualProducts) = try sut(sources: [sourceConfig], tests: [testConfig])!
+
+        XCTAssertEqual(actualTargets, [expectedRegularTarget, expectedTestTarget])
+        XCTAssertEqual(actualProducts, [expectedProduct])
+    }
+
+    func testBuilderError() throws {
+        let sourceConfig = Configuration(
+            targetDirectory: .sources,
+            directoryName: "SomeSourceDirectory",
+            configurationName: "config.yml",
+            configuration: SourceConfiguration(
+                type: .regular,
+                target: TargetConfiguration(
+                    name: "TargetName",
+                    resources: [
+                        ResourceConfiguration(
+                            rule: .copy,
+                            path: "Resources",
+                            localization: .default)
+                    ])))
+
+        XCTAssertThrows(
+            try sut(sources: [sourceConfig]),
+            "Invalid configuration at `/Sources/SomeSourceDirectory/config.yml`")
+    }
+}
