@@ -25,8 +25,7 @@ extension SourceGeneratorTests {
             Product(
                 name: targetName,
                 type: .executable,
-                targets: [targetName])
-        )
+                targets: [targetName]))
 
         XCTAssertEqual(actual, expected)
     }
@@ -41,8 +40,7 @@ extension SourceGeneratorTests {
             Product(
                 name: targetName,
                 type: .library(nil),
-                targets: [targetName])
-        )
+                targets: [targetName]))
 
         XCTAssertEqual(actual, expected)
     }
@@ -57,8 +55,7 @@ extension SourceGeneratorTests {
             Product(
                 name: targetName,
                 type: .library(.static),
-                targets: [targetName])
-        )
+                targets: [targetName]))
 
         XCTAssertEqual(actual, expected)
     }
@@ -73,8 +70,7 @@ extension SourceGeneratorTests {
             Product(
                 name: targetName,
                 type: .library(.dynamic),
-                targets: [targetName])
-        )
+                targets: [targetName]))
 
         XCTAssertEqual(actual, expected)
     }
@@ -88,8 +84,7 @@ extension SourceGeneratorTests {
             Product(
                 name: "Library",
                 type: .library(nil),
-                targets: ["Target1", "Target2"])
-        )
+                targets: ["Target1", "Target2"]))
 
         XCTAssertEqual(actual, expected)
     }
@@ -104,8 +99,7 @@ extension SourceGeneratorTests {
             Product(
                 name: targetName,
                 type: .plugin,
-                targets: [targetName])
-        )
+                targets: [targetName]))
 
         XCTAssertEqual(actual, expected)
     }
@@ -119,8 +113,7 @@ extension SourceGeneratorTests {
             """
 
         let actual = sut.dependency(
-            .targetItem(name: "Target")
-        )
+            .targetItem(name: "Target"))
 
         XCTAssertEqual(actual, expected)
     }
@@ -131,8 +124,7 @@ extension SourceGeneratorTests {
             """
 
         let actual = sut.dependency(
-            .productItem(name: "Product", package: "Package")
-        )
+            .productItem(name: "Product", package: "Package"))
 
         XCTAssertEqual(actual, expected)
     }
@@ -143,8 +135,7 @@ extension SourceGeneratorTests {
             """
 
         let actual = sut.dependency(
-            .productItem(name: "Product", package: nil)
-        )
+            .productItem(name: "Product", package: nil))
 
         XCTAssertEqual(actual, expected)
     }
@@ -155,8 +146,7 @@ extension SourceGeneratorTests {
             """
 
         let actual = sut.dependency(
-            .byNameItem(name: "Name")
-        )
+            .byNameItem(name: "Name"))
 
         XCTAssertEqual(actual, expected)
     }
@@ -170,8 +160,7 @@ extension SourceGeneratorTests {
             """
 
         let actual = sut.resource(
-            Target.Resource(rule: .copy, path: "Path")
-        )
+            Target.Resource(rule: .copy, path: "Path"))
 
         XCTAssertEqual(actual, expected)
     }
@@ -182,8 +171,7 @@ extension SourceGeneratorTests {
             """
 
         let actual = sut.resource(
-            Target.Resource(rule: .embedInCode, path: "Path")
-        )
+            Target.Resource(rule: .embedInCode, path: "Path"))
 
         XCTAssertEqual(actual, expected)
     }
@@ -194,8 +182,7 @@ extension SourceGeneratorTests {
             """
 
         let actual = sut.resource(
-            Target.Resource(rule: .process(nil), path: "Path")
-        )
+            Target.Resource(rule: .process(nil), path: "Path"))
 
         XCTAssertEqual(actual, expected)
     }
@@ -206,8 +193,7 @@ extension SourceGeneratorTests {
             """
 
         let actual = sut.resource(
-            Target.Resource(rule: .process(.base), path: "Path")
-        )
+            Target.Resource(rule: .process(.base), path: "Path"))
 
         XCTAssertEqual(actual, expected)
     }
@@ -218,8 +204,7 @@ extension SourceGeneratorTests {
             """
 
         let actual = sut.resource(
-            Target.Resource(rule: .process(.default), path: "Path")
-        )
+            Target.Resource(rule: .process(.default), path: "Path"))
 
         XCTAssertEqual(actual, expected)
     }
