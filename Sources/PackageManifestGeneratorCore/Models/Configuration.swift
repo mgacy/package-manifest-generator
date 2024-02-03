@@ -16,13 +16,13 @@ struct Configuration<C: Equatable>: Equatable {
     let directoryName: String
 
     /// The name of the configuration file.
-    let configurationName: String
+    let fileName: String
 
     /// The configuration.
     let configuration: C
 
     /// The path of the configuration file relative to the package root.
     var path: String {
-        "\(targetDirectory.path)/\(directoryName)/\(configurationName)"
+        "\(targetDirectory.path)/\(directoryName)/\(fileName)"
     }
 }

@@ -220,7 +220,7 @@ extension SourceModelBuilderTests {
         let sourceConfig = Configuration(
             targetDirectory: .sources,
             directoryName: "SomeSourceDirectory",
-            configurationName: "config.yml",
+            fileName: "config.yml",
             configuration: SourceConfiguration(
                 type: .regular,
                 target: TargetConfiguration(
@@ -236,7 +236,7 @@ extension SourceModelBuilderTests {
         let testConfig = Configuration(
             targetDirectory: .tests,
             directoryName: "SomeTestDirectory",
-            configurationName: "SomeTestConfiguration",
+            fileName: "SomeTestConfiguration",
             configuration: TestConfiguration(
                 target: TargetConfiguration(
                     name: "TestTargetName"
@@ -251,7 +251,7 @@ extension SourceModelBuilderTests {
         let sourceConfig = Configuration(
             targetDirectory: .sources,
             directoryName: "SomeSourceDirectory",
-            configurationName: "config.yml",
+            fileName: "config.yml",
             configuration: SourceConfiguration(
                 type: .regular,
                 target: TargetConfiguration(
