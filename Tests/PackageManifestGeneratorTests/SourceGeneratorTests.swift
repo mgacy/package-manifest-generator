@@ -233,6 +233,7 @@ extension SourceGeneratorTests {
             """
 
         let actual = sut.plugin(Target.PluginUsage(name: "Plugin", package: "plugin"))
+        
         XCTAssertEqual(actual, expected)
     }
 
@@ -242,6 +243,7 @@ extension SourceGeneratorTests {
             """
 
         let actual = sut.plugin(Target.PluginUsage(name: "Plugin", package: nil))
+        
         XCTAssertEqual(actual, expected)
     }
 }
@@ -258,6 +260,7 @@ extension SourceGeneratorTests {
         let target = Target(name: "Target")
         let sut = SourceGenerator(indentationStyle: .fourSpaces)
         let actual = sut.target(target)
+        
         XCTAssertEqual(actual, expected)
     }
 
@@ -310,6 +313,7 @@ extension SourceGeneratorTests {
             ])
         let sut = SourceGenerator(indentationStyle: .fourSpaces)
         let actual = sut.target(target)
+        
         XCTAssertEqual(actual, expected)
     }
 
@@ -323,6 +327,7 @@ extension SourceGeneratorTests {
         let target = Target(name: "Target")
         let sut = SourceGenerator(indentationStyle: .twoSpaces)
         let actual = sut.target(target)
+        
         XCTAssertEqual(actual, expected)
     }
 }
