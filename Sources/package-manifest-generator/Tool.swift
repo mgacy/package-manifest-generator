@@ -22,7 +22,7 @@ struct Tool: AsyncParsableCommand {
             completion: .file())
     var configurationPath: String?
 
-    @Option(help: "The package path to operate on (default current directory).", 
+    @Option(help: "The package path to operate on (default current directory).",
             completion: .directory)
     var packagePath: String?
 

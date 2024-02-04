@@ -118,7 +118,7 @@ public struct ResourceConfiguration: Codable, Equatable {
 
     /// The rule for the resource.
     @CodableDefault<Rule> public var rule: Rule
-    
+
     /// The path of the resource.
     public let path: String
 
@@ -160,17 +160,17 @@ public struct TargetConfiguration: Codable, Equatable {
 
     /// The paths to source and resource files excluded from the target.
     public let exclude: [String]?
-    
+
     /// The source files in this target.
     public let sources: [String]?
-    
+
     /// The explicit list of resource files in the target.
     public let resources: [ResourceConfiguration]?
-    
+
     /// A Boolean value determining whether access to package declarations from other targets in
     /// the package is allowed.
     public let packageAccess: Bool?
-    
+
     /// The plug-ins used by by the target.
     public let plugins: [PluginUsageConfiguration]?
 
