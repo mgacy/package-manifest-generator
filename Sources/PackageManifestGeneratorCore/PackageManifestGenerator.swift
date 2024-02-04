@@ -52,9 +52,11 @@ public struct PackageManifestGenerator {
         }
 
         // Update manifest
-        let generated = SourceGenerator(indentationStyle: config.indentationStyle)(
-            targets: targets,
-            products: products)
+        let generated = SourceGenerator(
+            indentationStyle: config.indentationStyle,
+            targetConfigurationName: config.targetConfigurationName)(
+                targets: targets,
+                products: products)
         let updatedManifest = ManifestHandler.assemble(
             prefix: prefix,
             generated: generated,
