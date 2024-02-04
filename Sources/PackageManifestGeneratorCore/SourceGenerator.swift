@@ -12,11 +12,20 @@ struct SourceGenerator {
     /// The style of indentation used in the generated code.
     let indentationStyle: IndentationStyle
 
+    /// The name of target configuration files.
+    let targetConfigurationName: String
+
     /// Creates an instance.
     ///
-    /// - Parameter indentationStyle: The style of indentation for the generated source.
-    init(indentationStyle: IndentationStyle = .default) {
+    /// - Parameters:
+    ///   - indentationStyle: The style of indentation for the generated source.
+    ///   - targetConfigurationName: /// The name of target configuration files.
+    init(
+        indentationStyle: IndentationStyle = .default,
+        targetConfigurationName: String = GeneratorConfiguration.TargetConfigurationName.default
+    ) {
         self.indentationStyle = indentationStyle
+        self.targetConfigurationName = targetConfigurationName
     }
 
     /// Returns the product and target declarations for the given targets.
@@ -33,6 +42,12 @@ struct SourceGenerator {
         var \(Constants.generatedProductsName): [Product] = \(productStrings.asSourceArray(indentationStyle: indentationStyle))
 
         var \(Constants.generatedTargetsName): [Target] = \(targetStrings.asSourceArray(indentationStyle: indentationStyle))
+
+        for target in \(Constants.generatedTargetsName) {
+            if !target.exclude.contains(\(targetConfigurationName.quoted())) {
+                target.exclude.append(\(targetConfigurationName.quoted())
+            }
+        }
         """
     }
 }
