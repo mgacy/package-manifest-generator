@@ -26,7 +26,7 @@ $ make install
 
 ### SwiftPM Command Plugin
 
-To use Package Manifest Generator as a SwiftPM plugin simply add it as a package dependency; there is no need to add it to any target dependencies:
+To use Package Manifest Generator as a SwiftPM plugin, simply add it as a package dependency; there is no need to add it to any target dependencies:
 
 ```swift
 dependencies: [
@@ -35,7 +35,7 @@ dependencies: [
 ]
 ```
 
-Invoke the command plugin with: 
+Invoke the command plugin with:
 
 ```sh
 $ swift package generate-manifest --allow-writing-to-package-directory
@@ -48,7 +48,7 @@ $ swift package generate-manifest --allow-writing-to-package-directory
 Configure Package Manifest Generator by adding a `.packagemanifestgenerator.yml` file to the package root:
 
 ```yaml
-# Control the indentation style of the generate code. Valid options are `twoSpaces`, `fourSpaces` (default), and `tabs`.
+# Control the indentation style of the generated code. Valid options are `twoSpaces`, `fourSpaces` (default), and `tabs`.
 indentationStyle: fourSpaces
 # Name of the configuration file at the root of target directories.
 targetConfigurationName: '_config.yml'
