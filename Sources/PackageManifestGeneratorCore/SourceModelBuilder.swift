@@ -87,10 +87,16 @@ extension SourceModelBuilder {
             throw "Invalid Configuration"
         }
 
+        let localization: Target.Resource.Localization? = resource.localization.flatMap {
+            switch $0 {
+            case .base: .base
+            case .default: .default
+            }
+        }
         let rule: Target.Resource.Rule = switch resource.rule {
         case .copy: .copy
         case .embed: .embedInCode
-        case .process: .process(resource.localization?.rawValue)
+        case .process: .process(localization)
         }
 
         return Target.Resource(rule: rule, path: resource.path)

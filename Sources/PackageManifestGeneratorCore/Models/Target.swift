@@ -22,11 +22,19 @@ struct Target: Equatable {
     /// A resource to bundle with the Swift package.
     struct Resource: Equatable {
 
+        /// The different types of localization for resources.
+        public enum Localization: String, Codable, Equatable {
+            /// The default localization.
+            case base
+            /// The base internationalization.
+            case `default`
+        }
+
         /// The different rules for resources.
         enum Rule: Equatable {
             case copy
             case embedInCode
-            case process(_ localization: String?)
+            case process(_ localization: Localization?)
         }
 
         /// The rule for the resource.
@@ -83,4 +91,39 @@ struct Target: Equatable {
 
     /// The plug-ins used by by the target.
     let plugins: [PluginUsage]?
+
+    /// Creates an instance.
+    ///
+    /// - Parameters:
+    ///   - name: The name of the target.
+    ///   - type: The type of the target.
+    ///   - packageAccess: Whether access to package declarations from other targets in the package
+    ///   is allowed.
+    ///   - path: The path of the target, relative to the package root.
+    ///   - sources: The source files in this target.
+    ///   - resources: The explicit list of resource files in the target.
+    ///   - exclude: The paths to source and resource files excluded from the target.
+    ///   - dependencies: The target's dependencies on other entities inside or outside the package.
+    ///   - plugins: The plug-ins used by by the target.
+    init(
+        name: String,
+        type: Target.TargetType = .regular,
+        packageAccess: Bool = true,
+        path: String? = nil,
+        sources: [String]? = nil,
+        resources: [Target.Resource]? = nil,
+        exclude: [String]? = nil,
+        dependencies: [Target.Dependency]? = nil,
+        plugins: [Target.PluginUsage]? = nil
+    ) {
+        self.name = name
+        self.type = type
+        self.packageAccess = packageAccess
+        self.path = path
+        self.sources = sources
+        self.resources = resources
+        self.exclude = exclude
+        self.dependencies = dependencies
+        self.plugins = plugins
+    }
 }
