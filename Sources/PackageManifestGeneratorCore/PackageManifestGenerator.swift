@@ -30,7 +30,7 @@ public struct PackageManifestGenerator {
                     Configuration(
                         targetDirectory: .sources,
                         directoryName: folder.name,
-                        configurationName: config.targetConfigurationName,
+                        fileName: config.targetConfigurationName,
                         configuration: try decoder.decode(SourceConfiguration.self, from: $0))
                 }
             }
@@ -42,7 +42,7 @@ public struct PackageManifestGenerator {
                 Configuration(
                     targetDirectory: .tests,
                     directoryName: folder.name,
-                    configurationName: config.targetConfigurationName,
+                    fileName: config.targetConfigurationName,
                     configuration: try decoder.decode(TestConfiguration.self, from: $0))
             }
         }
@@ -52,9 +52,11 @@ public struct PackageManifestGenerator {
         }
 
         // Update manifest
-        let generated = SourceGenerator(indentationStyle: config.indentationStyle)(
-            targets: targets,
-            products: products)
+        let generated = SourceGenerator(
+            indentationStyle: config.indentationStyle,
+            targetConfigurationName: config.targetConfigurationName)(
+                targets: targets,
+                products: products)
         let updatedManifest = ManifestHandler.assemble(
             prefix: prefix,
             generated: generated,

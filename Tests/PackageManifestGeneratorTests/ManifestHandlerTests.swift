@@ -129,7 +129,7 @@ extension ManifestHandlerTests {
         let generated = "generated"
         let suffix = "suffix"
         let actual = sut.assemble(prefix: prefix, generated: generated, suffix: suffix)
-        
+
         XCTAssertEqual(actual, expected)
     }
 
@@ -152,7 +152,7 @@ extension ManifestHandlerTests {
         let prefix = "prefix"
         let generated = "generated"
         let actual = sut.assemble(prefix: prefix, generated: generated)
-        
+
         XCTAssertEqual(actual, expected)
     }
 }

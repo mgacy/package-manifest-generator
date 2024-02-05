@@ -153,7 +153,7 @@ extension ConfigurationTests {
                         "Target3",
                         "Target4"
                     ]
-                ),
+                )
             ]
         )
 

@@ -9,7 +9,7 @@ import Foundation
 
 /// The configuration for ``PackageManifestGenerator``.
 public struct GeneratorConfiguration: Codable, Equatable {
-    public enum DefaultTargetConfigurationName: CodableDefaultSource {
+    public enum TargetConfigurationName: CodableDefaultSource {
         public static var `default` = "_config.yml"
     }
 
@@ -17,7 +17,7 @@ public struct GeneratorConfiguration: Codable, Equatable {
     @CodableDefault<IndentationStyle> public var indentationStyle: IndentationStyle
 
     /// The name of target configuration files.
-    @CodableDefault<DefaultTargetConfigurationName> public var targetConfigurationName: String
+    @CodableDefault<TargetConfigurationName> public var targetConfigurationName: String
 
     /// Creates a new configuration.
     ///
@@ -26,7 +26,7 @@ public struct GeneratorConfiguration: Codable, Equatable {
     ///   - targetConfigurationName: The name of target configuration files.
     public init(
         indentationStyle: IndentationStyle = .default,
-        targetConfigurationName: String = "_config.yml"
+        targetConfigurationName: String = TargetConfigurationName.default
     ) {
         self.indentationStyle = indentationStyle
         self.targetConfigurationName = targetConfigurationName
