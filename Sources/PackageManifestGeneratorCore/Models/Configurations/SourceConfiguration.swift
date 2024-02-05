@@ -17,9 +17,9 @@ public struct SourceConfiguration: Codable, Equatable {
         /// A library product.
         case library
         /// A dynamically-linked library product.
-        case dynamicLibrary = "dynamic"
+        case dynamicLibrary
         /// A statically-linked library product.
-        case staticLibrary = "static"
+        case staticLibrary
 
         public static var `default`: ProductType {
             .library
@@ -36,6 +36,22 @@ public struct SourceConfiguration: Codable, Equatable {
 
         /// The names of targets in this product.
         public let targets: [String]?
+
+        /// Creates an instance.
+        ///
+        /// - Parameters:
+        ///   - type: The type of product.
+        ///   - name: The name of the product.
+        ///   - targets: The names of targets in the product.
+        public init(
+            type: SourceConfiguration.ProductType,
+            name: String? = nil,
+            targets: [String]? = nil
+        ) {
+            self.type = type
+            self.name = name
+            self.targets = targets
+        }
     }
 
     /// The different types of targets.

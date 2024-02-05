@@ -35,7 +35,7 @@ public struct DependencyConfiguration: Codable, Equatable {
     ///   - name: The name of the target or product.
     ///   - type: The type of the dependency.
     ///   - package: The package for a product dependency.
-    public init(name: String, type: DependencyType, package: String? = nil) {
+    public init(name: String, type: DependencyType = .target, package: String? = nil) {
         self.name = name
         self.type = type
         self.package = package

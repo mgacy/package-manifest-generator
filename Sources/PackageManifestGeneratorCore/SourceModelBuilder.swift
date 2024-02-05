@@ -16,8 +16,8 @@ struct SourceModelBuilder {
     ///   - tests: The test target configurations.
     /// - Returns: The products and targets specified by the given configurations.
     func callAsFunction(
-        sources: [Configuration<SourceConfiguration>]?,
-        tests: [Configuration<TestConfiguration>]?
+        sources: [Configuration<SourceConfiguration>]? = nil,
+        tests: [Configuration<TestConfiguration>]? = nil
     ) throws -> ([Target], [Product]?)? {
         guard sources != nil || tests != nil else {
             return nil
@@ -47,7 +47,7 @@ struct SourceModelBuilder {
                         }
                     }
                 } catch {
-                    throw "Invalid configuration at `\(source.path)"
+                    throw "Invalid configuration at `\(source.path)`"
                 }
             }
         }
@@ -71,7 +71,7 @@ struct SourceModelBuilder {
 }
 
 extension SourceModelBuilder {
-    func makeDependency(_ configuration: DependencyConfiguration) throws -> Target.Dependency {
+    func makeDependency(_ configuration: DependencyConfiguration) -> Target.Dependency {
         switch configuration.type {
         case .target:
                 .targetItem(name: configuration.name)
@@ -107,7 +107,7 @@ extension SourceModelBuilder {
         targetType: Target.TargetType = .regular,
         configuration: TargetConfiguration? = nil
     ) throws -> Target {
-        let dependencies = try configuration?.dependencies?.map(makeDependency(_:))
+        let dependencies = configuration?.dependencies?.map(makeDependency(_:))
         let resources = try configuration?.resources?.map(makeResource(_:))
         let plugins = configuration?.plugins?.map { Target.PluginUsage(name: $0.name, package: $0.package) }
 
