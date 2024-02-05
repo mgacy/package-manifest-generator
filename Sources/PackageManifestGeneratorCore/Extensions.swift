@@ -39,6 +39,14 @@ extension Folder {
 
         return output
     }
+
+    /// Return the subfolder of the given target subdirectory.
+    ///
+    /// - parameter name: The target directory to return.
+    /// - throws: `LocationError` if the subfolder couldn't be found.
+    func targetFolder(_ name: TargetDirectory) throws -> Folder {
+        try subfolder(named: name.rawValue)
+    }
 }
 
 /// Easily throw generic errors with a text description.

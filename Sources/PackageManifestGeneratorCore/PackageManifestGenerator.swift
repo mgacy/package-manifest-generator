@@ -16,43 +16,45 @@ public struct PackageManifestGenerator {
     /// - Parameters:
     ///   - packagePath: The path to the package root.
     ///   - configuration: The generator configuration.
-    public static func run(packagePath: String, configuration config: Configuration) async throws {
+    public static func run(packagePath: String, configuration config: GeneratorConfiguration) async throws {
         let packageRoot = try Folder(path: packagePath)
         let packageManifest = try packageRoot.file(named: "Package.swift")
         let (prefix, suffix) = try ManifestHandler.components(of: packageManifest.readAsString())
 
         let decoder = YAMLDecoder()
-        var targets: [Target] = []
 
         // Sources
-        let sourceConfigs = try packageRoot
-            .subfolder(named: "Sources")
+        let sourceConfigs = try packageRoot.targetFolder(.sources)
             .processFilesInSubfolders(named: config.targetConfigurationName) { folder, data in
                 try data.flatMap {
-                    Target(
-                        name: folder.name,
-                        configuration: try decoder.decode(TargetConfiguration.self, from: $0))
+                    Configuration(
+                        targetDirectory: .sources,
+                        directoryName: folder.name,
+                        configurationName: config.targetConfigurationName,
+                        configuration: try decoder.decode(SourceConfiguration.self, from: $0))
                 }
             }
-        if let sourceConfigs {
-            targets.append(contentsOf: sourceConfigs)
-        }
 
         // Tests
-        let tests = try? packageRoot.subfolder(named: "Tests")
+        let tests = try? packageRoot.targetFolder(.tests)
         let testConfigs = try tests?.processFilesInSubfolders(named: config.targetConfigurationName) { folder, data in
             try data.flatMap {
-                Target(
-                    name: folder.name,
-                    configuration: try decoder.decode(TargetConfiguration.self, from: $0))
+                Configuration(
+                    targetDirectory: .tests,
+                    directoryName: folder.name,
+                    configurationName: config.targetConfigurationName,
+                    configuration: try decoder.decode(TestConfiguration.self, from: $0))
             }
         }
-        if let testConfigs {
-            targets.append(contentsOf: testConfigs)
+
+        guard let (targets, products) = try SourceModelBuilder()(sources: sourceConfigs, tests: testConfigs) else {
+            return
         }
 
         // Update manifest
-        let generated = SourceGenerator(indentationStyle: config.indentationStyle)(targets)
+        let generated = SourceGenerator(indentationStyle: config.indentationStyle)(
+            targets: targets,
+            products: products)
         let updatedManifest = ManifestHandler.assemble(
             prefix: prefix,
             generated: generated,
@@ -69,8 +71,8 @@ public extension PackageManifestGenerator {
     ///   - configurationPath: The path to the generator configuration file.
     static func run(packagePath: String, configurationPath: String? = nil) async throws {
         let configuration = try configurationPath.flatMap { path in
-            try YAMLDecoder().decode(Configuration.self, from: try File(path: path).read())
-        } ?? Configuration()
+            try YAMLDecoder().decode(GeneratorConfiguration.self, from: try File(path: path).read())
+        } ?? GeneratorConfiguration()
 
         try await run(packagePath: packagePath, configuration: configuration)
     }

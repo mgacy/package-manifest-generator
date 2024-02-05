@@ -2,33 +2,27 @@
 //  Configuration.swift
 //  PackageManifestGenerator
 //
-//  Created by Mathew Gacy on 11/16/23.
+//  Created by Mathew Gacy on 1/28/24.
 //
 
 import Foundation
 
-/// The configuration for ``PackageManifestGenerator``.
-public struct Configuration: Codable, Equatable {
-    public enum DefaultTargetConfigurationName: CodableDefaultSource {
-        public static var `default` = "_config.yml"
-    }
+/// A wrapper for a configuration and data about its location.
+struct Configuration<C: Equatable>: Equatable {
+    /// The target directory in which a configuration file is located.
+    let targetDirectory: TargetDirectory
 
-    /// The indentation style of the generated code.
-    @CodableDefault<IndentationStyle> public var indentationStyle: IndentationStyle
+    /// The name of the directory in which a configuration file is located.
+    let directoryName: String
 
-    /// The name of target configuration files.
-    @CodableDefault<DefaultTargetConfigurationName> public var targetConfigurationName: String
+    /// The name of the configuration file.
+    let configurationName: String
 
-    /// Creates a new configuration.
-    ///
-    /// - Parameters:
-    ///   - indentationStyle: The indentation style used when the generating code.
-    ///   - targetConfigurationName: The name of target configuration files.
-    public init(
-        indentationStyle: IndentationStyle = .default,
-        targetConfigurationName: String = "_config.yml"
-    ) {
-        self.indentationStyle = indentationStyle
-        self.targetConfigurationName = targetConfigurationName
+    /// The configuration.
+    let configuration: C
+
+    /// The path of the configuration file relative to the package root.
+    var path: String {
+        "\(targetDirectory.path)/\(directoryName)/\(configurationName)"
     }
 }
