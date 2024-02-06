@@ -57,7 +57,7 @@ var generatedTargets: [Target] = [
 
 for target in generatedTargets {
     if !target.exclude.contains("_config.yml") {
-        target.exclude.append("_config.yml"
+        target.exclude.append("_config.yml")
     }
 }
 

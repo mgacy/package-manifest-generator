@@ -45,7 +45,7 @@ struct SourceGenerator {
 
         for target in \(Constants.generatedTargetsName) {
             if !target.exclude.contains(\(targetConfigurationName.quoted())) {
-                target.exclude.append(\(targetConfigurationName.quoted())
+                target.exclude.append(\(targetConfigurationName.quoted()))
             }
         }
         """
