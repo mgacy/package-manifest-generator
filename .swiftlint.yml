@@ -1,10 +1,7 @@
 excluded:
     - .build
-    - Packages/*/.build
-    - Packages/Localization/Sources/Localization/Lingo.swift
+    - Example
     - Submodules
-    - Sources
-    - Packages/Localization/*
 opt_in_rules:
     - empty_count
     - explicit_init
@@ -56,4 +53,3 @@ large_tuple:
 
 cyclomatic_complexity:
   ignores_case_statements: true
-

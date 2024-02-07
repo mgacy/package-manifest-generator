@@ -1,6 +1,8 @@
-dependencies:
-  targets:
+products:
+  - type: library
+
+target:
+  dependencies:
     - Core
-  products:
     - name: Files
       package: Files

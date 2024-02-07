@@ -8,6 +8,34 @@
 import Files
 import Foundation
 
+extension Array where Element == String {
+    /// Returns a string representation of the array with the given indentation style.
+    ///
+    /// Usage:
+    ///
+    /// ```swift
+    /// ["foo", "bar"].asSourceArray()
+    /// // [
+    /// //     foo,
+    /// //     bar
+    /// // ]
+    /// ```
+    ///
+    /// - Parameter style: The indentation style.
+    func asSourceArray(indentationStyle style: IndentationStyle = .default) -> String {
+        isEmpty
+            ? "[]"
+            : "[\n\(self.joined(separator: ",\n").indented(1, style: style))\n]"
+    }
+}
+
+extension Collection {
+    /// A Boolean value indicating whether the collection contains elements.
+    var isNotEmpty: Bool {
+        !isEmpty
+    }
+}
+
 extension Folder {
     /// Returns the result of applying the given transformation to subfolders of this folder and the
     /// the contents of files with the given name in those subfolders.
@@ -38,6 +66,35 @@ extension Folder {
         }
 
         return output
+    }
+
+    /// Return the subfolder of the given target subdirectory.
+    ///
+    /// - parameter name: The target directory to return.
+    /// - throws: `LocationError` if the subfolder couldn't be found.
+    func targetFolder(_ name: TargetDirectory) throws -> Folder {
+        try subfolder(named: name.rawValue)
+    }
+}
+
+extension String {
+    /// Returns an indented version of the string using the given indentation style and level.
+    ///
+    /// - Parameters:
+    ///   - level: The level of indentation.
+    ///   - style: The indentation style.
+    func indented(_ level: Int, style: IndentationStyle = .default) -> String {
+        let prefix = Array(repeating: style.source, count: level)
+            .joined(separator: "")
+        let separator = "\n"
+        return components(separatedBy: separator)
+            .map { prefix + $0 }
+            .joined(separator: separator)
+    }
+
+    /// Returns a quoted version of the string.
+    func quoted() -> String {
+        "\"\(self)\""
     }
 }
 

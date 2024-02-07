@@ -1,6 +1,5 @@
-products:
-  - type: library
-
 target:
   dependencies:
+    - Bar
+    - Common
     - Foo
