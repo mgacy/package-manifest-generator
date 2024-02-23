@@ -12,25 +12,29 @@ import XCTest
 final class CodableDefaultTests: XCTestCase {
     struct TestModel: Codable, Equatable {
         @CodableDefault<Empty> var string: String
-        @CodableDefault<EmptyDictionary> var defaultDictionary: [String: String]
+        @CodableDefault<EmptyArray> var array: [Int]
+        @CodableDefault<EmptyDictionary> var dictionary: [String: String]
         @CodableDefault<False> var falseBool: Bool
         @CodableDefault<True> var trueBool: Bool
 
         init(
             string: String,
-            defaultDictionary: [String : String],
+            array: [Int],
+            dictionary: [String : String],
             falseBool: Bool,
             trueBool: Bool
         ) {
             self.string = string
-            self.defaultDictionary = defaultDictionary
+            self.array = array
+            self.dictionary = dictionary
             self.falseBool = falseBool
             self.trueBool = trueBool
         }
 
         static let `default` = TestModel(
             string: "",
-            defaultDictionary: [:],
+            array: [],
+            dictionary: [:],
             falseBool: false,
             trueBool: true)
     }
