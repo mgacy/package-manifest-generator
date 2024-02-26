@@ -6,6 +6,7 @@
 //
 
 @testable import PackageManifestGeneratorCore
+import CustomDump
 import Foundation
 import XCTest
 
@@ -23,7 +24,7 @@ extension SourceModelBuilderTests {
             type: .target)
         let actual = sut.makeDependency(config)
 
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testMakeProductDependency() {
@@ -37,7 +38,7 @@ extension SourceModelBuilderTests {
             package: "Package")
         let actual = sut.makeDependency(config)
 
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testMakeByNameDependency() {
@@ -48,7 +49,7 @@ extension SourceModelBuilderTests {
             type: .byName)
         let actual = sut.makeDependency(config)
 
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 }
 
@@ -64,7 +65,7 @@ extension SourceModelBuilderTests {
             path: "Resources")
         let actual = try sut.makeResource(config)
 
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testMakeEmbedInCodeResource() throws {
@@ -77,7 +78,7 @@ extension SourceModelBuilderTests {
             path: "Resources")
         let actual = try sut.makeResource(config)
 
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testMakeProcessResource() throws {
@@ -90,7 +91,7 @@ extension SourceModelBuilderTests {
             path: "Resources")
         let actual = try sut.makeResource(config)
 
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testMakeProcessResourceWithLocalization() throws {
@@ -104,7 +105,7 @@ extension SourceModelBuilderTests {
             localization: .default)
         let actual = try sut.makeResource(config)
 
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testMakeInvalidResource() throws {
@@ -129,7 +130,7 @@ extension SourceModelBuilderTests {
             directoryName: "DirectoryName",
             configuration: config)
 
-        XCTAssertEqual(actual.name, expectedName)
+        XCTAssertNoDifference(actual.name, expectedName)
     }
 
     func testMakeTargetFallbackName() throws {
@@ -140,7 +141,7 @@ extension SourceModelBuilderTests {
             directoryName: expectedName,
             configuration: config)
 
-        XCTAssertEqual(actual.name, expectedName)
+        XCTAssertNoDifference(actual.name, expectedName)
     }
 }
 
@@ -158,7 +159,7 @@ extension SourceModelBuilderTests {
             targets: ["Target"])
         let actual = sut.makeProduct(config, targetName: "TargetName")
 
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testMakeUnspecifiedLibraryProduct() {
@@ -173,7 +174,7 @@ extension SourceModelBuilderTests {
             targets: ["Target"])
         let actual = sut.makeProduct(config, targetName: "TargetName")
 
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testMakeDynamicLibraryProduct() {
@@ -188,7 +189,7 @@ extension SourceModelBuilderTests {
             targets: ["Target"])
         let actual = sut.makeProduct(config, targetName: "TargetName")
 
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testProductUsesTargetName() {
@@ -198,8 +199,8 @@ extension SourceModelBuilderTests {
         let config = SourceConfiguration.Product(type: .library)
         let actual = sut.makeProduct(config, targetName: expectedName)
 
-        XCTAssertEqual(actual.name, expectedName)
-        XCTAssertEqual(actual.targets, expectedTargets)
+        XCTAssertNoDifference(actual.name, expectedName)
+        XCTAssertNoDifference(actual.targets, expectedTargets)
     }
 }
 
@@ -243,8 +244,8 @@ extension SourceModelBuilderTests {
                 )))
         let (actualTargets, actualProducts) = try sut(sources: [sourceConfig], tests: [testConfig])!
 
-        XCTAssertEqual(actualTargets, [expectedRegularTarget, expectedTestTarget])
-        XCTAssertEqual(actualProducts, [expectedProduct])
+        XCTAssertNoDifference(actualTargets, [expectedRegularTarget, expectedTestTarget])
+        XCTAssertNoDifference(actualProducts, [expectedProduct])
     }
 
     func testBuilderError() throws {
