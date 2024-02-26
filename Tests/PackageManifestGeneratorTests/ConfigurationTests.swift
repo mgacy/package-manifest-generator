@@ -6,6 +6,7 @@
 //
 
 @testable import PackageManifestGeneratorCore
+import CustomDump
 import Foundation
 import XCTest
 import Yams
@@ -29,7 +30,7 @@ extension ConfigurationTests {
             """
 
         let actual = try decode(GeneratorConfiguration.self, from: yaml)
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testDecodeFullGeneratorConfiguration() throws {
@@ -43,7 +44,7 @@ extension ConfigurationTests {
             """
 
         let actual = try decode(GeneratorConfiguration.self, from: yaml)
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 }
 
@@ -57,7 +58,7 @@ extension ConfigurationTests {
         """
 
         let actual = try decode(TargetConfiguration.self, from: yaml)
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testDecodeFullTargetConfiguration() throws {
@@ -117,7 +118,7 @@ extension ConfigurationTests {
         """
 
         let actual = try decode(TargetConfiguration.self, from: yaml)
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 }
 
@@ -131,7 +132,7 @@ extension ConfigurationTests {
             """
 
         let actual = try decode(SourceConfiguration.self, from: yaml)
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testDecodeFullSourceConfiguration() throws {
@@ -173,6 +174,6 @@ extension ConfigurationTests {
         """
 
         let actual = try decode(SourceConfiguration.self, from: yaml)
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 }

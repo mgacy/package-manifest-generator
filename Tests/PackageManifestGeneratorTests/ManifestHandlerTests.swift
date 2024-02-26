@@ -6,6 +6,7 @@
 //
 
 @testable import PackageManifestGeneratorCore
+import CustomDump
 import Foundation
 import XCTest
 
@@ -36,8 +37,8 @@ extension ManifestHandlerTests {
             """
         let (actualPrefix, actualSuffix) = try sut.components(of: manifest)
 
-        XCTAssertEqual(actualPrefix, expectedPrefix)
-        XCTAssertEqual(actualSuffix, expectedSuffix)
+        XCTAssertNoDifference(actualPrefix, expectedPrefix)
+        XCTAssertNoDifference(actualSuffix, expectedSuffix)
     }
 
     func testComponentsOfUngeneratedManifest() throws {
@@ -78,7 +79,7 @@ extension ManifestHandlerTests {
 
         let (actualPrefix, actualSuffix) = try sut.components(of: manifest)
 
-        XCTAssertEqual(actualPrefix, manifest)
+        XCTAssertNoDifference(actualPrefix, manifest)
         XCTAssertNil(actualSuffix)
     }
 
@@ -130,7 +131,7 @@ extension ManifestHandlerTests {
         let suffix = "suffix"
         let actual = sut.assemble(prefix: prefix, generated: generated, suffix: suffix)
 
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 
     func testAssembleWithoutSuffix() throws {
@@ -153,6 +154,6 @@ extension ManifestHandlerTests {
         let generated = "generated"
         let actual = sut.assemble(prefix: prefix, generated: generated)
 
-        XCTAssertEqual(actual, expected)
+        XCTAssertNoDifference(actual, expected)
     }
 }
