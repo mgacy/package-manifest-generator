@@ -18,8 +18,7 @@ let package = Package(
         .package(url: "https://github.com/johnsundell/files.git", from: "4.0.0"),
         .package(url: "https://github.com/jpsim/Yams.git", from: "5.0.6"),
         .package(url: "https://github.com/mobelux/swift-version-file-plugin.git", from: "0.2.0"),
-        .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0"),
-        .package(url: "https://github.com/realm/SwiftLint.git", from: "0.54.0"),
+        .package(url: "https://github.com/pointfreeco/swift-custom-dump", from: "1.0.0")
     ],
     targets: [
         .executableTarget(
@@ -27,9 +26,6 @@ let package = Package(
             dependencies: [
                 "PackageManifestGeneratorCore",
                 .product(name: "ArgumentParser", package: "swift-argument-parser")
-            ],
-            plugins: [
-                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
             ]
         ),
         .target(
@@ -37,9 +33,6 @@ let package = Package(
             dependencies: [
                 .product(name: "Files", package: "Files"),
                 .product(name: "Yams", package: "Yams")
-            ],
-            plugins: [
-                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
             ]
         ),
         .testTarget(
@@ -47,9 +40,6 @@ let package = Package(
             dependencies: [
                 "PackageManifestGeneratorCore",
                 .product(name: "CustomDump", package: "swift-custom-dump")
-            ],
-            plugins: [
-                .plugin(name: "SwiftLintPlugin", package: "SwiftLint")
             ]
         ),
         .plugin(
@@ -69,3 +59,10 @@ let package = Package(
         )
     ]
 )
+
+#if os(macOS)
+package.dependencies.append(.package(url: "https://github.com/realm/SwiftLint.git", from: "0.54.0"))
+for target in package.targets.filter({ if case .plugin = $0.type { return false } else { return true } }) {
+    target.plugins = [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
+}
+#endif
