@@ -64,14 +64,14 @@ public enum Empty<T>: CodableDefaultSource where T: Codable & Equatable & RangeR
     public static var `default`: T { T() }
 }
 
+/// A source of empty values as default for array members.
+public enum EmptyArray<E>: CodableDefaultSource where E: Codable & Equatable {
+    public static var `default`: [E] { Array() }
+}
+
 /// A source of empty values as default for dictionary members.
 public enum EmptyDictionary<K, V>: CodableDefaultSource where K: Codable & Hashable, V: Codable & Equatable {
     public static var `default`: [K: V] { Dictionary() }
-}
-
-/// A source of empty values for string members.
-public enum EmptyString: CodableDefaultSource {
-    public static var `default`: String { "" }
 }
 
 // MARK: - Property Wrapper
