@@ -21,10 +21,12 @@ struct Tool: AsyncParsableCommand {
             help: "The path to the generator configuration file.",
             completion: .file())
     var configurationPath: String?
+    // swiftlint:disable:previous let_var_whitespace
 
     @Option(help: "The package path to operate on (default current directory).",
             completion: .directory)
     var packagePath: String?
+    // swiftlint:disable:previous let_var_whitespace
 
     /// Runs the tool.
     mutating func run() async throws {

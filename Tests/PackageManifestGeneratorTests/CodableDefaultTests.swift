@@ -17,10 +17,11 @@ final class CodableDefaultTests: XCTestCase {
         @CodableDefault<False> var falseBool: Bool
         @CodableDefault<True> var trueBool: Bool
 
+        // swiftlint:disable:next unneeded_synthesized_initializer
         init(
             string: String,
             array: [Int],
-            dictionary: [String : String],
+            dictionary: [String: String],
             falseBool: Bool,
             trueBool: Bool
         ) {

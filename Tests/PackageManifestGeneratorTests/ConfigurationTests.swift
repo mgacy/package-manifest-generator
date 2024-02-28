@@ -61,6 +61,7 @@ extension ConfigurationTests {
         XCTAssertNoDifference(actual, expected)
     }
 
+    // swiftlint:disable:next function_body_length
     func testDecodeFullTargetConfiguration() throws {
         let expected = TargetConfiguration(
             name: "MyTarget",
