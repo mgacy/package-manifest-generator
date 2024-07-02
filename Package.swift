@@ -61,8 +61,8 @@ let package = Package(
 )
 
 #if os(macOS)
-package.dependencies.append(.package(url: "https://github.com/realm/SwiftLint.git", from: "0.55.0"))
+package.dependencies.append(.package(url: "https://github.com/realm/SwiftLint.git", exact: "0.54.0"))
 for target in package.targets.filter({ if case .plugin = $0.type { return false } else { return true } }) {
-    target.plugins = [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLint")]
+    target.plugins = [.plugin(name: "SwiftLintPlugin", package: "SwiftLint")]
 }
 #endif
