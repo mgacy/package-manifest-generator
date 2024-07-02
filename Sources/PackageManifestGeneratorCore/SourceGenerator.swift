@@ -43,10 +43,8 @@ struct SourceGenerator {
 
         var \(Constants.generatedTargetsName): [Target] = \(targetStrings.asSourceArray(indentationStyle: indentationStyle))
 
-        for target in \(Constants.generatedTargetsName) {
-            if !target.exclude.contains(\(targetConfigurationName.quoted())) {
-                target.exclude.append(\(targetConfigurationName.quoted()))
-            }
+        for target in \(Constants.generatedTargetsName) where !target.exclude.contains(\(targetConfigurationName.quoted())) {
+            target.exclude.append(\(targetConfigurationName.quoted()))
         }
         """
     }
