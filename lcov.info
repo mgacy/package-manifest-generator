@@ -55,7 +55,7 @@ FN:75,$s5Files6FolderV28PackageManifestGeneratorCoreE06targetB0yAcD15TargetDirec
 FN:86,$sSS28PackageManifestGeneratorCoreE8indented_5styleSSSi_AA16IndentationStyleOtF
 FN:91,$sSS28PackageManifestGeneratorCoreE8indented_5styleSSSi_AA16IndentationStyleOtFS2SXEfU_
 FN:96,$sSS28PackageManifestGeneratorCoreE6quotedSSyF
-FN:103,$sSS28PackageManifestGeneratorCoreE16errorDescriptionSSSgvg
+FN:104,$sSS28PackageManifestGeneratorCoreE16errorDescriptionSSSgvg
 FNDA:5,$sSa28PackageManifestGeneratorCoreSSRszlE13asSourceArray16indentationStyleSSAA011IndentationI0O_tF
 FNDA:6,$sSl28PackageManifestGeneratorCoreE10isNotEmptySbvg
 FNDA:0,$s5Files6FolderV28PackageManifestGeneratorCoreE07processA12InSubfolders5named9transformSayxGSgSS_xSgAC_20FoundationEssentials4DataVSgtKXEtKlF
@@ -103,9 +103,9 @@ DA:93,8
 DA:96,39
 DA:97,39
 DA:98,39
-DA:103,0
 DA:104,0
 DA:105,0
+DA:106,0
 BRF:0
 BRH:0
 LF:41
