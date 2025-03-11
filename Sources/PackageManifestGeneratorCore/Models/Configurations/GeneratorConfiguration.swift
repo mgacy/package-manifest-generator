@@ -10,7 +10,7 @@ import Foundation
 /// The configuration for ``PackageManifestGenerator``.
 public struct GeneratorConfiguration: Codable, Equatable {
     public enum TargetConfigurationName: CodableDefaultSource {
-        public static var `default` = "_config.yml"
+        public static let `default` = "_config.yml"
     }
 
     /// The indentation style of the generated code.

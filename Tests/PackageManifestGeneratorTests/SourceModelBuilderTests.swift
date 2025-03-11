@@ -24,7 +24,7 @@ extension SourceModelBuilderTests {
             type: .target)
         let actual = sut.makeDependency(config)
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testMakeProductDependency() {
@@ -38,7 +38,7 @@ extension SourceModelBuilderTests {
             package: "Package")
         let actual = sut.makeDependency(config)
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testMakeByNameDependency() {
@@ -49,7 +49,7 @@ extension SourceModelBuilderTests {
             type: .byName)
         let actual = sut.makeDependency(config)
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 }
 
@@ -65,7 +65,7 @@ extension SourceModelBuilderTests {
             path: "Resources")
         let actual = try sut.makeResource(config)
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testMakeEmbedInCodeResource() throws {
@@ -78,7 +78,7 @@ extension SourceModelBuilderTests {
             path: "Resources")
         let actual = try sut.makeResource(config)
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testMakeProcessResource() throws {
@@ -91,7 +91,7 @@ extension SourceModelBuilderTests {
             path: "Resources")
         let actual = try sut.makeResource(config)
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testMakeProcessResourceWithLocalization() throws {
@@ -105,7 +105,7 @@ extension SourceModelBuilderTests {
             localization: .default)
         let actual = try sut.makeResource(config)
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testMakeInvalidResource() throws {
@@ -130,7 +130,7 @@ extension SourceModelBuilderTests {
             directoryName: "DirectoryName",
             configuration: config)
 
-        XCTAssertNoDifference(actual.name, expectedName)
+        expectNoDifference(actual.name, expectedName)
     }
 
     func testMakeTargetFallbackName() throws {
@@ -141,7 +141,7 @@ extension SourceModelBuilderTests {
             directoryName: expectedName,
             configuration: config)
 
-        XCTAssertNoDifference(actual.name, expectedName)
+        expectNoDifference(actual.name, expectedName)
     }
 }
 
@@ -159,7 +159,7 @@ extension SourceModelBuilderTests {
             targets: ["Target"])
         let actual = sut.makeProduct(config, targetName: "TargetName")
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testMakeUnspecifiedLibraryProduct() {
@@ -174,7 +174,7 @@ extension SourceModelBuilderTests {
             targets: ["Target"])
         let actual = sut.makeProduct(config, targetName: "TargetName")
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testMakeDynamicLibraryProduct() {
@@ -189,7 +189,7 @@ extension SourceModelBuilderTests {
             targets: ["Target"])
         let actual = sut.makeProduct(config, targetName: "TargetName")
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testProductUsesTargetName() {
@@ -199,8 +199,8 @@ extension SourceModelBuilderTests {
         let config = SourceConfiguration.Product(type: .library)
         let actual = sut.makeProduct(config, targetName: expectedName)
 
-        XCTAssertNoDifference(actual.name, expectedName)
-        XCTAssertNoDifference(actual.targets, expectedTargets)
+        expectNoDifference(actual.name, expectedName)
+        expectNoDifference(actual.targets, expectedTargets)
     }
 }
 
@@ -244,8 +244,8 @@ extension SourceModelBuilderTests {
                 )))
         let (actualTargets, actualProducts) = try sut(sources: [sourceConfig], tests: [testConfig])!
 
-        XCTAssertNoDifference(actualTargets, [expectedRegularTarget, expectedTestTarget])
-        XCTAssertNoDifference(actualProducts, [expectedProduct])
+        expectNoDifference(actualTargets, [expectedRegularTarget, expectedTestTarget])
+        expectNoDifference(actualProducts, [expectedProduct])
     }
 
     func testBuilderError() throws {

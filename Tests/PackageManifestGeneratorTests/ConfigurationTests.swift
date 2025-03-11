@@ -30,7 +30,7 @@ extension ConfigurationTests {
             """
 
         let actual = try decode(GeneratorConfiguration.self, from: yaml)
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testDecodeFullGeneratorConfiguration() throws {
@@ -44,7 +44,7 @@ extension ConfigurationTests {
             """
 
         let actual = try decode(GeneratorConfiguration.self, from: yaml)
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 }
 
@@ -58,7 +58,7 @@ extension ConfigurationTests {
         """
 
         let actual = try decode(TargetConfiguration.self, from: yaml)
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     // swiftlint:disable:next function_body_length
@@ -119,7 +119,7 @@ extension ConfigurationTests {
         """
 
         let actual = try decode(TargetConfiguration.self, from: yaml)
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 }
 
@@ -133,7 +133,7 @@ extension ConfigurationTests {
             """
 
         let actual = try decode(SourceConfiguration.self, from: yaml)
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testDecodeFullSourceConfiguration() throws {
@@ -175,6 +175,6 @@ extension ConfigurationTests {
         """
 
         let actual = try decode(SourceConfiguration.self, from: yaml)
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 }

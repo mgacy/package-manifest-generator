@@ -28,7 +28,7 @@ extension SourceGeneratorTests {
                 type: .executable,
                 targets: [targetName]))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testUnspecifiedLibraryProduct() {
@@ -43,7 +43,7 @@ extension SourceGeneratorTests {
                 type: .library(nil),
                 targets: [targetName]))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testStaticLibraryProduct() {
@@ -58,7 +58,7 @@ extension SourceGeneratorTests {
                 type: .library(.static),
                 targets: [targetName]))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testDynamicLibraryProduct() {
@@ -73,7 +73,7 @@ extension SourceGeneratorTests {
                 type: .library(.dynamic),
                 targets: [targetName]))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testMultipleTargets() {
@@ -87,7 +87,7 @@ extension SourceGeneratorTests {
                 type: .library(nil),
                 targets: ["Target1", "Target2"]))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testPluginTarget() {
@@ -102,7 +102,7 @@ extension SourceGeneratorTests {
                 type: .plugin,
                 targets: [targetName]))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 }
 
@@ -116,7 +116,7 @@ extension SourceGeneratorTests {
         let actual = sut.dependency(
             .targetItem(name: "Target"))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testProductItemDependency() {
@@ -127,7 +127,7 @@ extension SourceGeneratorTests {
         let actual = sut.dependency(
             .productItem(name: "Product", package: "Package"))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testPackagelessProductItemDependency() {
@@ -138,7 +138,7 @@ extension SourceGeneratorTests {
         let actual = sut.dependency(
             .productItem(name: "Product", package: nil))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testByNameDependency() {
@@ -149,7 +149,7 @@ extension SourceGeneratorTests {
         let actual = sut.dependency(
             .byNameItem(name: "Name"))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 }
 
@@ -163,7 +163,7 @@ extension SourceGeneratorTests {
         let actual = sut.resource(
             Target.Resource(rule: .copy, path: "Path"))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testEmbedResource() {
@@ -174,7 +174,7 @@ extension SourceGeneratorTests {
         let actual = sut.resource(
             Target.Resource(rule: .embedInCode, path: "Path"))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testProcessResource() {
@@ -185,7 +185,7 @@ extension SourceGeneratorTests {
         let actual = sut.resource(
             Target.Resource(rule: .process(nil), path: "Path"))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testProcessBaseLocalizationResource() {
@@ -196,7 +196,7 @@ extension SourceGeneratorTests {
         let actual = sut.resource(
             Target.Resource(rule: .process(.base), path: "Path"))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testProcessDefaultLocalizationResource() {
@@ -207,7 +207,7 @@ extension SourceGeneratorTests {
         let actual = sut.resource(
             Target.Resource(rule: .process(.default), path: "Path"))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 }
 
@@ -220,7 +220,7 @@ extension SourceGeneratorTests {
 
         let actual = sut.plugin(Target.PluginUsage(name: "Plugin", package: "plugin"))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testPackagelessPlugin() {
@@ -230,7 +230,7 @@ extension SourceGeneratorTests {
 
         let actual = sut.plugin(Target.PluginUsage(name: "Plugin", package: nil))
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 }
 
@@ -247,7 +247,7 @@ extension SourceGeneratorTests {
         let sut = SourceGenerator(indentationStyle: .fourSpaces)
         let actual = sut.target(target)
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testComplexTarget() {
@@ -300,7 +300,7 @@ extension SourceGeneratorTests {
         let sut = SourceGenerator(indentationStyle: .fourSpaces)
         let actual = sut.target(target)
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 
     func testIndendation() {
@@ -314,6 +314,6 @@ extension SourceGeneratorTests {
         let sut = SourceGenerator(indentationStyle: .twoSpaces)
         let actual = sut.target(target)
 
-        XCTAssertNoDifference(actual, expected)
+        expectNoDifference(actual, expected)
     }
 }
