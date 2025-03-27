@@ -128,7 +128,7 @@ extension SourceGenerator {
 
         // Resources
         if let resources = target.resources, resources.isNotEmpty {
-            arguments.append("resource: \(resources.map(Self.resource(_:)).asSourceArray(indentationStyle: indentationStyle))")
+            arguments.append("resources: \(resources.map(Self.resource(_:)).asSourceArray(indentationStyle: indentationStyle))")
         }
 
         // Plugins
