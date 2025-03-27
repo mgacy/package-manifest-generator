@@ -266,7 +266,7 @@ extension SourceGeneratorTests {
                     "source/path/1",
                     "source/path/2"
                 ],
-                resource: [
+                resources: [
                     .copy("Resources")
                 ],
                 plugins: [
