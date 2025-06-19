@@ -10,7 +10,7 @@ import Foundation
 import Yams
 
 /// The main entry point for PackageManifestGeneratorCore.
-public struct PackageManifestGenerator {
+public struct PackageManifestGenerator: Sendable {
     /// Runs the generator.
     ///
     /// - Parameters:

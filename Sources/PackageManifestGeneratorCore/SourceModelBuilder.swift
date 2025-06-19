@@ -8,7 +8,7 @@
 import Foundation
 
 /// A builder to validate configuration files and generate the source models they represent.
-struct SourceModelBuilder {
+struct SourceModelBuilder: Sendable {
     /// Returns products and targets specified by the given configurations.
     ///
     /// - Parameters:
