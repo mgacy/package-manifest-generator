@@ -11,7 +11,7 @@ import Foundation
 enum TargetDirectory: String, Equatable, Sendable {
     /// The default directory for regular and executable targets.
     case sources = "Sources"
-    /// The defaut directory for test targets.
+    /// The default directory for test targets.
     case tests = "Tests"
     /// The default directory for plugin targets.
     case plugins = "Plugins"
