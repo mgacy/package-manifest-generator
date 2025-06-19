@@ -8,10 +8,10 @@
 import Foundation
 
 /// The configuration for a regular or executable target and associated products.
-public struct SourceConfiguration: Codable, Equatable {
+public struct SourceConfiguration: Codable, Equatable, Sendable {
 
     /// The different types of products.
-    public enum ProductType: String, Codable, CodableDefaultSource, Equatable {
+    public enum ProductType: String, Codable, CodableDefaultSource, Equatable, Sendable {
         /// An executable product.
         case executable
         /// A library product.
@@ -27,7 +27,7 @@ public struct SourceConfiguration: Codable, Equatable {
     }
 
     /// The configuration for a product.
-    public struct Product: Codable, Equatable {
+    public struct Product: Codable, Equatable, Sendable {
         /// The type of product.
         @CodableDefault<ProductType> public var type: ProductType
 
@@ -55,7 +55,7 @@ public struct SourceConfiguration: Codable, Equatable {
     }
 
     /// The different types of targets.
-    public enum TargetType: String, Codable, CodableDefaultSource, Equatable {
+    public enum TargetType: String, Codable, CodableDefaultSource, Equatable, Sendable {
         /// A regular target.
         case regular
         /// An executable target.

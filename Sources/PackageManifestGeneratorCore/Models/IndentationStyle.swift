@@ -8,7 +8,7 @@
 import Foundation
 
 /// Styles of indentation for generated source code.
-public enum IndentationStyle: String, Codable, CodableDefaultSource, Equatable {
+public enum IndentationStyle: String, Codable, CodableDefaultSource, Equatable, Sendable {
     /// A style of indentation using two spaces.
     case twoSpaces
     /// A style of indentation using four spaces.

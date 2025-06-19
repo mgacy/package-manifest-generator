@@ -8,7 +8,7 @@
 import Foundation
 
 /// The configuration for ``PackageManifestGenerator``.
-public struct GeneratorConfiguration: Codable, Equatable {
+public struct GeneratorConfiguration: Codable, Equatable, Sendable {
     public enum TargetConfigurationName: CodableDefaultSource {
         public static let `default` = "_config.yml"
     }

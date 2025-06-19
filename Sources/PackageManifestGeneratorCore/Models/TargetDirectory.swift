@@ -8,7 +8,7 @@
 import Foundation
 
 /// The default locations of different kinds of Swift package targets.
-enum TargetDirectory: String, Equatable {
+enum TargetDirectory: String, Equatable, Sendable {
     /// The default directory for regular and executable targets.
     case sources = "Sources"
     /// The defaut directory for test targets.
