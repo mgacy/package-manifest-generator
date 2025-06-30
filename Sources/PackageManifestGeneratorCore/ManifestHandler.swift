@@ -99,6 +99,6 @@ struct ManifestHandler {
             generated,
             generatedEnd,
             suffix ?? defaultSuffix
-        ].joined(separator: componentSeparator)
+        ].joined(separator: componentSeparator) + "\n"
     }
 }
