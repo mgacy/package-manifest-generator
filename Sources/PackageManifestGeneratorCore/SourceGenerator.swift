@@ -8,7 +8,7 @@
 import Foundation
 
 /// Generates product and target declarations for the given target configurations.
-struct SourceGenerator {
+struct SourceGenerator: Sendable {
     /// The style of indentation used in the generated code.
     let indentationStyle: IndentationStyle
 

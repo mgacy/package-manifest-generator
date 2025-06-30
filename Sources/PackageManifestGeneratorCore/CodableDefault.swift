@@ -110,3 +110,4 @@ public struct CodableDefault<Source: CodableDefaultSource>: Codable {
 
 extension CodableDefault: Equatable where Source.Value: Equatable {}
 extension CodableDefault: Hashable where Source.Value: Hashable {}
+extension CodableDefault: Sendable where Source.Value: Sendable {}

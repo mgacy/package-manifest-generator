@@ -8,7 +8,7 @@
 import Foundation
 
 /// The configuration for a test target.
-public struct TestConfiguration: Codable, Equatable {
+public struct TestConfiguration: Codable, Equatable, Sendable {
 
     /// The target configuration.
     public let target: TargetConfiguration?

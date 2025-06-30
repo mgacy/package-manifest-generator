@@ -8,7 +8,7 @@
 import Foundation
 
 /// A handler to decompose and assemble a generated package manifest.
-struct ManifestHandler {
+struct ManifestHandler: Sendable {
     /// The name of the `Package` instance declared in the package manifest.
     static let packageInstanceName = "package"
 

@@ -8,10 +8,10 @@
 import Foundation
 
 /// The configuration for a package target dependency.
-public struct DependencyConfiguration: Codable, Equatable {
+public struct DependencyConfiguration: Codable, Equatable, Sendable {
 
     /// The different types of a dependency.
-    public enum DependencyType: String, Codable, Equatable {
+    public enum DependencyType: String, Codable, Equatable, Sendable {
         /// A dependency on a target.
         case target
         /// A dependency on a product.
@@ -76,7 +76,7 @@ extension DependencyConfiguration: ExpressibleByStringLiteral {
 }
 
 /// The configuration for a plugin used by a package target.
-public struct PluginUsageConfiguration: Codable, Equatable {
+public struct PluginUsageConfiguration: Codable, Equatable, Sendable {
     /// The name of the plug-in target.
     public let name: String
 
@@ -95,10 +95,10 @@ public struct PluginUsageConfiguration: Codable, Equatable {
 }
 
 /// The configuration for a resource used by a package target.
-public struct ResourceConfiguration: Codable, Equatable {
+public struct ResourceConfiguration: Codable, Equatable, Sendable {
 
     /// The different rules for resources.
-    public enum Rule: String, Codable, CodableDefaultSource, Equatable {
+    public enum Rule: String, Codable, CodableDefaultSource, Equatable, Sendable {
         case copy
         case embed
         case process
@@ -109,7 +109,7 @@ public struct ResourceConfiguration: Codable, Equatable {
     }
 
     /// The different types of localization for resources.
-    public enum Localization: String, Codable, Equatable {
+    public enum Localization: String, Codable, Equatable, Sendable {
         /// The default localization.
         case base
         /// The base internationalization.
@@ -147,7 +147,7 @@ public struct ResourceConfiguration: Codable, Equatable {
 }
 
 /// The configuration for a package target.
-public struct TargetConfiguration: Codable, Equatable {
+public struct TargetConfiguration: Codable, Equatable, Sendable {
 
     /// The name of the target.
     public let name: String?

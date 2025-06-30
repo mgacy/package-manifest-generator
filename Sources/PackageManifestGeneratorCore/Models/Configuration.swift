@@ -26,3 +26,5 @@ struct Configuration<C: Equatable>: Equatable {
         "\(targetDirectory.path)/\(directoryName)/\(fileName)"
     }
 }
+
+extension Configuration: Sendable where C: Sendable {}

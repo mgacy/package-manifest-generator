@@ -8,10 +8,10 @@
 import Foundation
 
 /// A Swift package target.
-struct Target: Equatable {
+struct Target: Equatable, Sendable {
 
     /// A plug-in used in a target.
-    struct PluginUsage: Equatable {
+    struct PluginUsage: Equatable, Sendable {
         /// The name of the plug-in target.
         let name: String
 
@@ -20,10 +20,10 @@ struct Target: Equatable {
     }
 
     /// A resource to bundle with the Swift package.
-    struct Resource: Equatable {
+    struct Resource: Equatable, Sendable {
 
         /// The different types of localization for resources.
-        public enum Localization: String, Codable, Equatable {
+        public enum Localization: String, Codable, Equatable, Sendable {
             /// The default localization.
             case base
             /// The base internationalization.
@@ -31,7 +31,7 @@ struct Target: Equatable {
         }
 
         /// The different rules for resources.
-        enum Rule: Equatable {
+        enum Rule: Equatable, Sendable {
             case copy
             case embedInCode
             case process(_ localization: Localization?)
@@ -45,7 +45,7 @@ struct Target: Equatable {
     }
 
     /// The different types of a target.
-    enum TargetType: String {
+    enum TargetType: String, Sendable {
         /// A target that contains code for the Swift package's functionality.
         case regular = "target"
         /// A target that contains code for an executable's main module.
@@ -55,7 +55,7 @@ struct Target: Equatable {
     }
 
     /// The different types of a target's dependency on another entity.
-    enum Dependency: Equatable {
+    enum Dependency: Equatable, Sendable {
         /// A dependency on a target.
         case targetItem(name: String)
         /// A dependency on a product.
