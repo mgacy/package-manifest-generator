@@ -2,11 +2,11 @@
 
 Define SwiftPM products and targets with YAML configuration files.
 
-## 🎯 Use Case
+## Use Case
 
 Maintaining the manifest of a Swift package with many targets -- for example, a `Features` package with a target for each feature of an application -- can become unwieldy. This tool is designed to address that by using YAML configuration files in each target to generate package product and target declarations that it inserts into a package manifest. These configuration files can also be added as part of any automations used to bootstrap new feature creation.
 
-## 🖥 Installation
+## Installation
 
 Package Manifest Generator may be used either as a standalone CLI tool or as a Swift Package Manager plugin.
 
@@ -15,7 +15,7 @@ Package Manifest Generator may be used either as a standalone CLI tool or as a S
 You can use [Mint](https://github.com/yonaskolb/mint) to install `package-manifest-generator`:
 
 ```sh
-$ mint install Mobelux/package-manifest-generator
+$ mint install mgacy/package-manifest-generator
 ```
 
 Alternatively, you can use the [Makefile](Makefile) to build and install:
@@ -30,7 +30,7 @@ To use Package Manifest Generator as a SwiftPM plugin, simply add it as a packag
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/Mobelux/package-manifest-generator.git", from: "0.1.0")
+    .package(url: "https://github.com/mgacy/package-manifest-generator.git", from: "0.1.0")
     ...
 ]
 ```
@@ -41,7 +41,7 @@ Invoke the command plugin with:
 $ swift package generate-manifest --allow-writing-to-package-directory
 ```
 
-## ⚙ Usage
+## Usage
 
 ### Tool Configuration
 
