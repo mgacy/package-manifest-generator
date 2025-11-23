@@ -10,7 +10,7 @@ jobs:
   test:
     name: Test
     if: github.event.pull_request.merged == true && github.head_ref == 'release'
-    uses: Mobelux/package-manifest-generator/.github/workflows/test.yml@main
+    uses: mgacy/package-manifest-generator/.github/workflows/test.yml@main
 
   release:
     name: Release
