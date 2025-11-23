@@ -14,7 +14,7 @@ on:
 jobs:
   test:
     if: github.event.pull_request.draft == false
-    uses: Mobelux/swift-package-workflows/.github/workflows/test.yml@feature/code-coverage
+    uses: mgacy/swift-package-workflows/.github/workflows/test.yml@feature/code-coverage
     with:
       report-coverage: true
       diff-coverage: ${{ github.event.pull_request.base.ref == 'main' }}
